@@ -9,6 +9,7 @@
   },
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
+    "rosie-build": "parcel build src/Shared/ClientApp/rosie/rosie.html --dist-dir src/Venus/wwwroot --no-source-maps --no-cache --no-autoinstall --no-content-hash",
     "venus-start": "parcel serve src/Venus/ClientApp/app.html --dist-dir dist --no-cache -p 8585 --hmr-port 8586",
     "venus-build": "parcel build src/Venus/ClientApp/app.html --dist-dir src/Venus/wwwroot --no-source-maps --no-cache --no-autoinstall --no-content-hash"
   },

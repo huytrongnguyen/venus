@@ -5,13 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Venus</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/app.3bd35c15.css?_dc=@(DateTime.Now.Ticks)" />
+    <link rel="stylesheet" href="/rosie.421395f3.css?_dc=@(DateTime.Now.Ticks)" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    @RenderBody()
+    <div class="app d-flex flex-column">
+      <header class="navbar navbar-expand-lg px-3 py-0 border-bottom">
+        <span class="navbar-brand mb-0 fw-bold">Venus</span>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto">
+            <a href="/" class="nav-link active">Master Data</a>
+            <a href="/Reports" class="nav-link">Reports</a>
+            <a href="/Load" class="nav-link">Load</a>
+            <a href="/Search" class="nav-link">Search</a>
+            <a href="/Administration" class="nav-link">Administration</a>
+          </ul>
+        </div>
+        <Account />
+      </header>
+      <div class="app-body d-flex flex-row flex-1">
+        @RenderBody()
+      </div>
+    </div>
 
-    <script src="/app.2b7ac4e5.js?_dc=@(DateTime.Now.Ticks)"></script>
 
+    <script src="/rosie.3acb50c2.js?_dc=@(DateTime.Now.Ticks)"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

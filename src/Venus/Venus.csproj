@@ -6,6 +6,15 @@
     <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\Administration\Administration.csproj" />
+    <ProjectReference Include="..\MasterData\MasterData.csproj" />
+    <ProjectReference Include="..\Reports\Reports.csproj" />
+    <ProjectReference Include="..\Load\Load.csproj" />
+    <ProjectReference Include="..\Search\Search.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>annotations</Nullable>
