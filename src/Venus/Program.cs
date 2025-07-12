@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Minerva.Config;
-using Minerva.Infrastructure;
 using Npgsql;
 using Shared;
+using Venus.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,16 +22,16 @@ var dataSource = dataSourceBuilder.Build();
 var services = builder.Services;
 
 services
-    .Configure<ServerConfig>(builder.Configuration.GetSection(nameof(ServerConfig)))
-    .AddDbContext<MasterDbContext>(options => {
+    .AddDbContext<VenusDbContext>(options => {
       options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
     })
-    .AddCors()
-    .AddRazorPages();
+  .AddCors()
+  .AddRazorPages();
 
 services.AddControllers();
 
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
 
 var app = builder.Build();
 

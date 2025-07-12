@@ -7,7 +7,7 @@ export function AppView() {
   return <Router>
     <div className="app d-flex flex-column">
       <header className="navbar navbar-expand-lg px-3 py-0 border-bottom">
-        <span className="navbar-brand mb-0 fw-bold">Minerva</span>
+        <span className="navbar-brand mb-0 fw-bold">Venus</span>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav me-auto">
             <a href="/" className="nav-link active">Master Data</a>

@@ -7,7 +7,7 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "minerva/core": ["src/Minerva/ClientApp/core"],
+      "venus/core": ["src/Venus/ClientApp/core"],
       "rosie": ["src/Shared/ClientApp/rosie/ts"]
     },
     "removeComments": true,
