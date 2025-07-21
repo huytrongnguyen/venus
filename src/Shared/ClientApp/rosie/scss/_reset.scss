@@ -29,3 +29,20 @@ body, input, textarea, select, button {
 .btn-danger, .btn-outline-danger:hover, .btn-check:checked + .btn-outline-danger {
   color: $white !important;
 }
+
+// Navs
+//
+// Kickstart any navigation component with a set of style resets. Works with
+// `<nav>`s, `<ul>`s or `<ol>`s.
+
+.nav-link {
+  &:hover, &:focus {
+    color: $component-hover-bg;
+    text-decoration: none;
+  }
+  &.active {
+    color: $primary !important;
+    font-weight: bold;
+    cursor: default;
+  }
+}
