@@ -7,7 +7,7 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "venus/core": ["src/Venus/ClientApp/core"],
+      "administration/core": ["src/Administration/ClientApp/core"],
       "rosie": ["src/Shared/ClientApp/rosie/ts"]
     },
     "removeComments": true,

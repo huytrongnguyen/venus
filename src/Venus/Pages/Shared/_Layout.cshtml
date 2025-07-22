@@ -6,7 +6,7 @@
     <title>Venus</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/rosie.421395f3.css?_dc=@(DateTime.Now.Ticks)" />
-    @await RenderSectionAsync("Styles", required: false)
+    @RenderSection("Styles", required: false)
 </head>
 <body class="p-2">
     <div class="app d-flex flex-column border rounded-3">
@@ -25,6 +25,6 @@
 
 
     <script src="/rosie.3acb50c2.js?_dc=@(DateTime.Now.Ticks)"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

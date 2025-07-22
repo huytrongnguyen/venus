@@ -9,9 +9,10 @@
   },
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
+    "build": "npm run rosie-build && npm run admin-build",
     "rosie-build": "parcel build src/Shared/ClientApp/rosie/rosie.html --dist-dir src/Venus/wwwroot --no-source-maps --no-cache --no-autoinstall --no-content-hash",
-    "venus-start": "parcel serve src/Venus/ClientApp/app.html --dist-dir dist --no-cache -p 8585 --hmr-port 8586",
-    "venus-build": "parcel build src/Venus/ClientApp/app.html --dist-dir src/Venus/wwwroot --no-source-maps --no-cache --no-autoinstall --no-content-hash"
+    "admin-build": "parcel build src/Administration/ClientApp/admin.html --dist-dir src/Venus/wwwroot --no-source-maps --no-cache --no-autoinstall --no-content-hash",
+    "admin-start": "parcel serve src/Administration/ClientApp/admin.html --dist-dir dist --no-cache -p 8585 --hmr-port 8586"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "2.15.4",
+    "@parcel/optimizer-esbuild": "2.15.4",
     "@types/bootstrap": "5.2.10",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
@@ -34,7 +36,7 @@
     "typescript": "5.8.3"
   },
   "alias": {
-    "venus/core": "./src/Venus/ClientApp/core",
+    "administration/core": "./src/Administration/ClientApp/core",
     "rosie": "./src/Shared/ClientApp/rosie/ts"
   }
 }

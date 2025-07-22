@@ -19,7 +19,7 @@ html, body, main, .app, .app-wrapper, .app-body, .main, .aside-menu, .fullscreen
   }
 }
 
-.mask {
+.loading-indicator {
   position: absolute;
   top: 0;
   right: 0;
@@ -29,7 +29,7 @@ html, body, main, .app, .app-wrapper, .app-body, .main, .aside-menu, .fullscreen
   transition: opacity .15s linear;
   background-color: transparent;
   display: none;
-  .mask-msg {
+  .loading-indicator-msg {
     padding: 5px;
     width: 100px;
     position: absolute;
@@ -42,7 +42,7 @@ html, body, main, .app, .app-wrapper, .app-body, .main, .aside-menu, .fullscreen
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color: rgba(0, 0, 0, 0.03);
-    .mask-msg-text {
+    .loading-indicator-msg-text {
       padding: 5px;
       font: normal 11px $font-family-base;
       color: $body-color !important;

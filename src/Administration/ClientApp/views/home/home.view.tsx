@@ -12,6 +12,9 @@ export function HomeView() {
   return <>
     <div className="container-fluid">
       <div className="list-group">
+        <div role="button" className="list-group-item list-group-item-action">
+          HomeView
+        </div>
         {/* {groupList?.map(group => <div role="button" className="list-group-item list-group-item-action">
           <a href={group.code}>{group.name}</a>
         </div>)} */}
