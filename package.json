@@ -10,8 +10,15 @@
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
     "build": "npm run rosie-build && npm run admin-build",
-    "rosie-build": "parcel build src/Shared/ClientApp/rosie/rosie.html --dist-dir src/Venus/wwwroot --no-source-maps --no-cache --no-autoinstall --no-content-hash",
-    "admin-build": "parcel build src/Administration/ClientApp/admin.html --dist-dir src/Venus/wwwroot --no-source-maps --no-cache --no-autoinstall --no-content-hash",
+    "rosie-build": "npm run rosie-fonts && npm run rosie-css && npm run rosie-js",
+    "rosie-fonts": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts src/Venus/wwwroot/",
+    "rosie-css": "sass src/Shared/ClientApp/rosie/scss/index.scss src/Venus/wwwroot/rosie.css --style=compressed --no-source-map",
+    "rosie-js": "esbuild src/Shared/ClientApp/rosie/ts/index.ts --bundle --outfile=src/Venus/wwwroot/rosie.js --loader:.tsx=tsx --format=iife --minify",
+    "rosie-js-watch": "esbuild src/Shared/ClientApp/rosie/ts/index.ts --bundle --outfile=src/Venus/wwwroot/rosie.js --loader:.tsx=tsx --format=iife --watch",
+    "admin-build": "npm run admin-css && npm run admin-js",
+    "admin-css": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
+    "admin-js": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
+    "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch",
     "admin-start": "parcel serve src/Administration/ClientApp/admin.html --dist-dir dist --no-cache -p 8585 --hmr-port 8586"
   },
   "dependencies": {
@@ -24,19 +31,16 @@
     "react-router-dom": "7.6.3"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "2.15.4",
-    "@parcel/optimizer-esbuild": "2.15.4",
     "@types/bootstrap": "5.2.10",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@types/react-router-dom": "5.3.3",
-    "buffer": "6.0.3",
-    "parcel": "2.15.4",
-    "process": "0.11.10",
+    "esbuild": "0.25.8",
+    "sass": "1.89.2",
     "typescript": "5.8.3"
   },
   "alias": {
-    "administration/core": "./src/Administration/ClientApp/core",
+    "admin/core": "./src/Administration/ClientApp/core",
     "rosie": "./src/Shared/ClientApp/rosie/ts"
   }
 }
