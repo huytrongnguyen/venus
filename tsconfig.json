@@ -8,7 +8,7 @@
     "baseUrl": ".",
     "paths": {
       "administration/core": ["src/Administration/ClientApp/core"],
-      "rosie": ["src/Shared/ClientApp/rosie/ts"]
+      "rosie/core": ["src/Shared/ClientApp/rosie/ts"]
     },
     "removeComments": true,
     "declaration": true,

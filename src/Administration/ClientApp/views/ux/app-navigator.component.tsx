@@ -1,8 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 
-import { NavItem } from 'minerva/core';
-import { Rosie } from 'rosie';
+import { NavItem, Rosie } from 'rosie/core';
 
 const navigator: NavItem[] = [{
   navId: 'home',
@@ -32,14 +31,14 @@ export function AppNavigator() {
 
   return <nav className="d-flex flex-column">
     {navigation.map(navItem => {
-      if (navItem.children && navItem.children.length > 0) {
-        return <Fragment key={navItem.navId}>
-          <div className="nav-link disabled text-dark text-uppercase fw-bold p-1">{navItem.navName}</div>
-          {navItem.children.map(childNavItem => {
-            return <NavigationLink key={childNavItem.navId} isChild navItem={childNavItem} active={location?.pathname.startsWith(childNavItem.navPath)} />
-          })}
-        </Fragment>
-      }
+      // if (navItem.children && navItem.children.length > 0) {
+      //   return <Fragment key={navItem.navId}>
+      //     <div className="nav-link disabled text-dark text-uppercase fw-bold p-1">{navItem.navName}</div>
+      //     {navItem.children.map(childNavItem => {
+      //       return <NavigationLink key={childNavItem.navId} isChild navItem={childNavItem} active={location?.pathname.startsWith(childNavItem.navPath)} />
+      //     })}
+      //   </Fragment>
+      // }
 
       if (!navItem.navPath) return null;
 
