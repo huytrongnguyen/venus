@@ -10,25 +10,25 @@
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
     "build": "npm run rosie-build && npm run admin-build",
-    "rosie-build": "npm run rosie-fonts && npm run rosie-css && npm run rosie-js",
-    "rosie-fonts": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts src/Venus/wwwroot/",
-    "rosie-css": "sass src/Shared/ClientApp/rosie/scss/index.scss src/Venus/wwwroot/rosie.css --style=compressed --no-source-map",
-    "rosie-js": "esbuild src/Shared/ClientApp/rosie/ts/index.ts --bundle --outfile=src/Venus/wwwroot/rosie.js --loader:.tsx=tsx --format=iife --minify",
+    "rosie-build": "npm run rosie-fonts-build && npm run rosie-css-build && npm run rosie-js-build",
+    "rosie-fonts-build": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts src/Venus/wwwroot/",
+    "rosie-css-build": "sass src/Shared/ClientApp/rosie/scss/index.scss src/Venus/wwwroot/rosie.css --style=compressed --no-source-map",
+    "rosie-js-build": "esbuild src/Shared/ClientApp/rosie/ts/index.ts --bundle --outfile=src/Venus/wwwroot/rosie.js --loader:.tsx=tsx --format=iife --minify",
     "rosie-js-watch": "esbuild src/Shared/ClientApp/rosie/ts/index.ts --bundle --outfile=src/Venus/wwwroot/rosie.js --loader:.tsx=tsx --format=iife --watch",
-    "admin-build": "npm run admin-css && npm run admin-js",
-    "admin-css": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
-    "admin-js": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
-    "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch",
-    "admin-start": "parcel serve src/Administration/ClientApp/admin.html --dist-dir dist --no-cache -p 8585 --hmr-port 8586"
+    "admin-build": "npm run admin-css-build && npm run admin-js-build",
+    "admin-css-build": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
+    "admin-js-build": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
+    "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6.7.2",
+    "@fortawesome/fontawesome-free": "7.0.0",
     "@popperjs/core": "2.11.8",
-    "axios": "1.10.0",
+    "axios": "1.11.0",
     "bootstrap": "5.3.7",
+    "jquery": "3.7.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-router-dom": "7.6.3"
+    "react-router-dom": "7.7.1"
   },
   "devDependencies": {
     "@types/bootstrap": "5.2.10",
@@ -41,6 +41,7 @@
   },
   "alias": {
     "admin/core": "./src/Administration/ClientApp/core",
-    "rosie/core": "./src/Shared/ClientApp/rosie/ts"
+    "rosie/components": "./src/Shared/ClientApp/rosie/ts/components",
+    "rosie/core": "./src/Shared/ClientApp/rosie/ts/core"
   }
 }

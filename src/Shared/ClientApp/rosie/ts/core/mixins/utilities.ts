@@ -1,4 +1,4 @@
-import { Dictionary } from './types';
+import { Dictionary } from '../types';
 
 export const isString = (value: any) => typeof value === 'string';
 export const isNumber = (value: any) => typeof value === 'number';
@@ -9,6 +9,7 @@ export const isDate = (value: any) => toString.call(value) === '[object Date]' &
 export const isEmpty = (value: any) => value === undefined || value == null || value === '' || (isString(value) && value.trim() === '') || (isArray(value) && value.length === 0) || (isObject(value) && Object.keys(value).length === 0);
 export const isNotEmpty = (value: any) => !isEmpty(value);
 
+export const guid = (prefix: string = '', suffix: string = '') => `${prefix}${(Math.random() * (1<<30)).toString(16).replace('.', '')}${suffix}`;
 
 export function classNames(...expressions: any[]) {
   return expressions

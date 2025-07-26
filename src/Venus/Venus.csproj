@@ -13,6 +13,7 @@
     <ProjectReference Include="..\Reports\Reports.csproj" />
     <ProjectReference Include="..\Load\Load.csproj" />
     <ProjectReference Include="..\Search\Search.csproj" />
+    <ProjectReference Include="..\Auth\Auth.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

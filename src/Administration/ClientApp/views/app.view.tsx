@@ -1,7 +1,7 @@
-import { HashRouter as Router, Navigate, Route, Routes, Link } from 'react-router';
-import { LoadingIndicator } from 'rosie/core';
-import { HomeView } from './home';
+import { HashRouter as Router, Navigate, Route, Routes } from 'react-router';
+import { LoadingIndicator } from 'rosie/components';
 import { AppNavigator } from './ux';
+import { UserGroupView } from './user-group.view';
 // import { MonitoringDetailsView, MonitoringListView } from './monitoring';
 
 export function AppView() {
@@ -16,7 +16,7 @@ export function AppView() {
         <LoadingIndicator />
         <div className="app-body d-flex flex-column">
           <Routes>
-            <Route path="/" element={<HomeView />} />
+            <Route path="/" element={<UserGroupView />} />
             {/* <Route path="/monitoring" element={<MonitoringListView />} />
             <Route path="/monitoring/details" element={<MonitoringDetailsView />} /> */}
             <Route path="*" element={<Navigate to="/" />} />

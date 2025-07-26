@@ -7,8 +7,9 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
-      "administration/core": ["src/Administration/ClientApp/core"],
-      "rosie/core": ["src/Shared/ClientApp/rosie/ts"]
+      "admin/core": ["src/Administration/ClientApp/core"],
+      "rosie/components": ["src/Shared/ClientApp/rosie/ts/components"],
+      "rosie/core": ["src/Shared/ClientApp/rosie/ts/core"]
     },
     "removeComments": true,
     "declaration": true,
