@@ -1,12 +1,12 @@
 import { PropsWithChildren, HTMLAttributes, ReactElement } from 'react';
-import { DataModel, DataStore } from 'rosie/core';
+import { DataModel } from 'rosie/core';
 
 export interface GridProps extends PropsWithChildren<any> {
-  data?: any[],
-  store?: DataStore<any>,
-  checkboxSelection?: boolean,
-  bbar?: (records: DataModel<any>[]) => ReactElement,
-  pagingToolbar?: { pageSize?: number },
+  // data?: any[],
+  // store?: DataStore<any>,
+  // checkboxSelection?: boolean,
+  // bbar?: (records: DataModel<any>[]) => ReactElement,
+  // pagingToolbar?: { pageSize?: number },
 }
 
 export type GridRowProps = {

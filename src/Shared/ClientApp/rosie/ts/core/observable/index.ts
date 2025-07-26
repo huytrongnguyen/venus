@@ -4,20 +4,6 @@ export interface Observer<T> {
   complete?: () => void,
 }
 
-export class Subscription<T> {
-  constructor(private subject: Subject<T>, private subscriber: Observer<T>) { }
-
-  unsubscribe() {
-    const { observers } = this.subject;
-    if (!observers || !observers.length) return;
-
-    const subscriberIndex = observers.indexOf(this.subscriber);
-    if (subscriberIndex > -1) {
-      observers.splice(subscriberIndex, 1);
-    }
-  }
-}
-
 export class Subject<T> implements Observer<T> {
   observers: Observer<T>[] = [];
   value: T;
@@ -34,5 +20,19 @@ export class Subject<T> implements Observer<T> {
   next(value: T) {
     this.value = value;
     this.observers.forEach(observer => observer.next && observer.next(value));
+  }
+}
+
+export class Subscription<T> {
+  constructor(private subject: Subject<T>, private subscriber: Observer<T>) { }
+
+  unsubscribe() {
+    const { observers } = this.subject;
+    if (!observers || !observers.length) return;
+
+    const subscriberIndex = observers.indexOf(this.subscriber);
+    if (subscriberIndex > -1) {
+      observers.splice(subscriberIndex, 1);
+    }
   }
 }

@@ -1,0 +1,8 @@
+.rosie-grid {
+  &.rosie-grid-bordered {
+    .rosie-grid-row {
+      border-bottom: 1px solid $border-color;
+      .rosie-grid-cell { border-right: 1px solid $border-color; }
+    }
+  }
+}

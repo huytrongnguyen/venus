@@ -4,21 +4,18 @@ import { Link, useLocation } from 'react-router';
 import { NavItem, Rosie } from 'src/Shared/ClientApp/rosie/ts/core';
 
 const navigator: NavItem[] = [{
-  navId: 'home',
-  navName: 'Home',
-  navPath: '/home'
-}, {
-  navId: 'reporting',
-  navName: 'User Groups',
-  navPath: '/reporting'
-}, {
-  navId: 'audit-trail',
-  navName: 'Audit Trail',
-  navPath: '/audit-trail'
-}, {
-  navId: 'monitoring',
-  navName: 'Monitoring',
-  navPath: '/monitoring'
+  navId: 'access-management',
+  navName: 'Access management',
+  children: [{
+    navId: 'user-groups',
+    navName: 'User groups',
+    navPath: '/'
+  }, {
+    navId: 'users',
+    navName: 'Users',
+    navPath: '/users'
+  }]
+
 }]
 
 export function AppNavigator() {
@@ -31,14 +28,14 @@ export function AppNavigator() {
 
   return <nav className="d-flex flex-column">
     {navigation.map(navItem => {
-      // if (navItem.children && navItem.children.length > 0) {
-      //   return <Fragment key={navItem.navId}>
-      //     <div className="nav-link disabled text-dark text-uppercase fw-bold p-1">{navItem.navName}</div>
-      //     {navItem.children.map(childNavItem => {
-      //       return <NavigationLink key={childNavItem.navId} isChild navItem={childNavItem} active={location?.pathname.startsWith(childNavItem.navPath)} />
-      //     })}
-      //   </Fragment>
-      // }
+      if (navItem.children && navItem.children.length > 0) {
+        return <Fragment key={navItem.navId}>
+          <div className="nav-link disabled text-body-tertiary fw-bold p-1">{navItem.navName}</div>
+          {navItem.children.map(childNavItem => {
+            return <NavigationLink key={childNavItem.navId} isChild navItem={childNavItem} active={location?.pathname.startsWith(childNavItem.navPath)} />
+          })}
+        </Fragment>
+      }
 
       if (!navItem.navPath) return null;
 

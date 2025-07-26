@@ -9,23 +9,22 @@ export type NavItem = {
   navName: string,
   navIcon?: string,
   navPath?: string,
+  children?: NavItem[],
 }
 
-export type HttpMethod = Method;
+// export type HttpMethod = Method;
 
-export interface AjaxError extends AxiosError<any> { }
+// export interface AjaxError extends AxiosError<any> { }
 
-export type HttpParams = {
-  pathParams?: Dictionary<any>,
-  queryParams?: Dictionary<any>,
-  body?: any,
-  headers?: Dictionary<any>,
-}
+// export type HttpParams = {
+//   pathParams?: Dictionary<any>,
+//   queryParams?: Dictionary<any>,
+//   body?: any,
+//   headers?: Dictionary<any>,
+// }
 
-export type AjaxSettings = {
-  url: string,
-  method?: HttpMethod,
-  params?: HttpParams,
-}
-
-export type Item = { name: string, value: any }
+// export type AjaxSettings = {
+//   url: string,
+//   method?: HttpMethod,
+//   params?: HttpParams,
+// }
