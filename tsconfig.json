@@ -8,8 +8,8 @@
     "baseUrl": ".",
     "paths": {
       "admin/core": ["src/Administration/ClientApp/core"],
-      "rosie/components": ["src/Shared/ClientApp/rosie/ts/components"],
-      "rosie/core": ["src/Shared/ClientApp/rosie/ts/core"]
+      "rosie/components": ["src/Shared/ClientApp/ts/components"],
+      "rosie/core": ["src/Shared/ClientApp/ts/core"]
     },
     "removeComments": true,
     "declaration": true,

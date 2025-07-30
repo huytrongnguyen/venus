@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { DataModel, Rosie } from 'rosie/core';
-import { Grid, GridColumn, Dialog, useDialog } from 'rosie/components';
+import { DataModel, Rosie } from 'src/Shared/ClientApp/ts/core';
+import { Grid, GridColumn, Dialog, useDialog } from 'src/Shared/ClientApp/ts/components';
 import { UserGroup } from 'admin/core';
 
 // https://000001.awsstudygroup.com/3-create-admin-user-and-group/
@@ -23,7 +23,7 @@ export function UserGroupsView() {
         </button>
       </div>
     </ol>
-    <main>
+    <main className="fullscreen">
       <Grid fitScreen>
         <GridColumn headerName="Group name" field="groupName" style={{flex:1}} renderer={(groupName: string, record: DataModel<UserGroup>) => {
           return <span role="button" className="text-primary text-decoration-underline">{groupName}</span>

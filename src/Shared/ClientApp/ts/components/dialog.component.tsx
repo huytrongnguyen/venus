@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Rosie } from 'rosie/core';
+import { Rosie } from 'src/Shared/ClientApp/ts/core';
 
 type DialogProps = {
   id?: string,

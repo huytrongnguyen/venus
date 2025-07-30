@@ -1,15 +1,16 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fullscreen">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Venus</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/rosie.css?_dc=@(DateTime.Now.Ticks)" />
+    <link rel="stylesheet" href="/venus.css?_dc=@(DateTime.Now.Ticks)" />
     @RenderSection("Styles", required: false)
 </head>
-<body class="p-2">
-    <div class="app d-flex flex-column border rounded-3">
+<body class="fullscreen p-2">
+    <div class="fullscreen d-flex flex-column border rounded-3">
       <header class="navbar navbar-expand-lg px-3 py-0 border-bottom">
         <span class="navbar-brand mb-0 fw-bold">Venus</span>
         <div class="collapse navbar-collapse">
@@ -18,7 +19,7 @@
         </div>
         <Account />
       </header>
-      <div class="app-body d-flex flex-row flex-1">
+      <div class="fullscreen d-flex flex-row flex-1">
         @RenderBody()
       </div>
     </div>

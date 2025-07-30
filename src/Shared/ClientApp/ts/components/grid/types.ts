@@ -1,5 +1,5 @@
 import { PropsWithChildren, HTMLAttributes, ReactElement } from 'react';
-import { DataModel } from 'rosie/core';
+import { DataModel } from 'src/Shared/ClientApp/ts/core';
 
 export interface GridProps extends PropsWithChildren<any> {
   // data?: any[],

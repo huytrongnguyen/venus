@@ -1,5 +1,5 @@
 import { useState, useEffect, Children } from 'react';
-import { DataModel, Rosie } from 'rosie/core';
+import { DataModel, Rosie } from 'src/Shared/ClientApp/ts/core';
 // import { PagingToolbar } from '../paging-toolbar.component';
 import { GridColumnProps, GridProps } from './types';
 // import { GridRow } from './grid-row.component';
@@ -69,7 +69,7 @@ export function Grid(props: GridProps) {
         </div>
         <div className={Rosie.classNames('rosie-grid-body d-flex flex-column', { 'fullscreen overflow-x-auto overflow-y-scroll': props.fitScreen })}>
           <div>
-            {(!records?.length) && <div className="p-2">No record found.</div>}
+            {(!records?.length) && <div className="border-top p-2">No record found.</div>}
             {/* {(records?.length > 0) && records.map((record, rowIndex) => {
               return <GridRow key={rowIndex} record={record} rowIndex={rowIndex} columns={columns} checkboxSelection={props.checkboxSelection} />
             })} */}

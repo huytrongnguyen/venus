@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DataModel, Rosie } from 'rosie/core';
+import { DataModel, Rosie } from 'src/Shared/ClientApp/ts/core';
 import { GridColumnProps } from './types';
 
 interface GridCellProps extends GridColumnProps {

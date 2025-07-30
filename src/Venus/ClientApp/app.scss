@@ -1,0 +1,14 @@
+@use '../../Shared/ClientApp/scss/variables' as *;
+
+aside {
+  .nav-link {
+    &:not(.active) {
+      &:hover { background-color: $list-group-hover-bg; }
+    }
+    &.active {
+      color: $white;
+      background-color: $primary;
+      cursor: default;
+    }
+  }
+}

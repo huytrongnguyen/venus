@@ -15,22 +15,55 @@
 //   -moz-osx-font-smoothing: grayscale;
 // }
 
-// // Buttons
-// //
-// // For each of Bootstrap's buttons, define text, background, and border color.
+// Buttons (813)
+//
+// For each of Bootstrap's buttons, define text, background, and border color.
 
-// .btn-outline-secondary {
-//   border-color: $border-color !important;
-//   color: $body-color;
-// }
+.btn-outline-secondary {
+  border-color: $border-color !important;
+  color: $body-color;
+}
 
-// .btn-primary, .btn-outline-primary:hover, .btn-check:checked + .btn-outline-primary,
-// .btn-success, .btn-outline-success:hover, .btn-check:checked + .btn-outline-success,
-// .btn-danger, .btn-outline-danger:hover, .btn-check:checked + .btn-outline-danger {
-//   color: $white !important;
-// }
+.btn-primary, .btn-outline-primary:hover, .btn-check:checked + .btn-outline-primary,
+.btn-success, .btn-outline-success:hover, .btn-check:checked + .btn-outline-success,
+.btn-danger, .btn-outline-danger:hover, .btn-check:checked + .btn-outline-danger {
+  color: $white !important;
+}
 
 // Navs (1156)
+//
+// Kickstart any navigation component with a set of style resets. Works with
+// `<nav>`s, `<ul>`s or `<ol>`s.
+
+.nav-link {
+  &:hover, &:focus {
+    color: $link-hover-color;
+  }
+}
+
+// Navbar (1187)
+//
+// Provide a static navbar from which we expand to create full-width, fixed, and
+// other navbar variations.
+
+// Navbar brand
+//
+// Used for brand, project, or site names.
+
+.navbar-brand { color: $primary !important; }
+
+// Navbar nav
+//
+// Custom navbar navigation (doesn't require `.nav`, but does make use of `.nav-link`).
+
+.navbar-nav {
+  .nav-link {
+    &.active, &.show {
+      color: $navbar-active-color;
+      cursor: default;
+    }
+  }
+}
 
 // Breadcrumbs (1631)
 
@@ -68,20 +101,3 @@
     &.active { font-weight: bold; }
   }
 }
-
-// // Navs
-// //
-// // Kickstart any navigation component with a set of style resets. Works with
-// // `<nav>`s, `<ul>`s or `<ol>`s.
-
-// .nav-link {
-//   &:hover, &:focus {
-//     color: $component-hover-bg;
-//     text-decoration: none;
-//   }
-//   &.active {
-//     color: $primary !important;
-//     font-weight: bold;
-//     cursor: default;
-//   }
-// }
