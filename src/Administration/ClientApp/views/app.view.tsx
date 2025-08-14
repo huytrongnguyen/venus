@@ -1,10 +1,19 @@
+import { useEffect } from 'react';
 import { HashRouter as Router, Navigate, Route, Routes } from 'react-router';
-import { LoadingIndicator } from 'src/Shared/ClientApp/ts/components';
+import { LocalCache } from 'rosie/core';
+import { LoadingIndicator } from 'rosie/components';
 import { AppNavigator } from './ux';
 import { UserGroupsView } from './user-groups.view';
-// import { MonitoringDetailsView, MonitoringListView } from './monitoring';
+import { AUTH_TOKEN, AuthUserModel } from 'venus/core';
+import { RequireAuth } from 'venus/components';
 
 export function AppView() {
+  useEffect(() => {
+    if (LocalCache.get(AUTH_TOKEN)) {
+      AuthUserModel.load();
+    }
+  }, []);
+
   return <Router>
     <div className="app fullscreen d-flex flex-row">
       <aside className="app-sidebar d-flex flex-column border-end">
@@ -16,10 +25,10 @@ export function AppView() {
         <LoadingIndicator />
         <div className="app-body fullscreen d-flex flex-column">
           <Routes>
-            <Route path="/" element={<UserGroupsView />} />
+            <Route path="/user-groups" element={<RequireAuth component={UserGroupsView} title="User groups" />} />
             {/* <Route path="/monitoring" element={<MonitoringListView />} />
             <Route path="/monitoring/details" element={<MonitoringDetailsView />} /> */}
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/user-groups" />} />
           </Routes>
         </div>
       </div>

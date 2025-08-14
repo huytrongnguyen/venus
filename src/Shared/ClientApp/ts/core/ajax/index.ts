@@ -1,26 +1,43 @@
-// import axios, { AxiosRequestConfig } from 'axios';
-// import { AjaxSettings } from '../types';
+import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
+import { Dictionary } from '../types';
 
-// export const Ajax = {
-//   request: async <T>(settings: AjaxSettings) => {
-//     const { method = 'get', params = {} } = settings;
-//     let { url } = settings;
+export type HttpMethod = Method;
 
-//     if (params.pathParams) {
-//       Object.entries(params.pathParams).forEach(([key,value]) => url = url.replace(`{${key}}`, value))
-//     }
+export interface AjaxError extends AxiosError<any> { }
 
-//     if (params.queryParams) {
-//       url = `${url}?${Object.entries(params.queryParams).map(([key,value]) => `${key}=${value}`).join('&')}`
-//     }
+export type HttpParams = {
+  pathParams?: Dictionary<any>,
+  queryParams?: Dictionary<any>,
+  body?: any,
+  headers?: Dictionary<any>,
+}
 
-//     const config: AxiosRequestConfig = {
-//       url, method,
-//       headers: params.headers || {},
-//       timeout: 0,
-//     };
-//     params.body && (config.data = params.body);
+export type AjaxSettings = {
+  url: string,
+  method?: HttpMethod,
+  params?: HttpParams,
+}
 
-//     return (await axios(config)).data as T;
-//   },
-// }
+export const Ajax = {
+  request: async <T>(settings: AjaxSettings) => {
+    const { method = 'get', params = {} } = settings;
+    let { url } = settings;
+
+    if (params.pathParams) {
+      Object.entries(params.pathParams).forEach(([key,value]) => url = url.replace(`{${key}}`, value))
+    }
+
+    if (params.queryParams) {
+      url = `${url}?${Object.entries(params.queryParams).map(([key,value]) => `${key}=${value}`).join('&')}`
+    }
+
+    const config: AxiosRequestConfig = {
+      url, method,
+      headers: params.headers || {},
+      timeout: 0,
+    };
+    params.body && (config.data = params.body);
+
+    return (await axios(config)).data as T;
+  },
+}

@@ -1,4 +1,10 @@
+using System.Security.Claims;
+using System.Text;
+using Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Shared;
 using Venus.Infrastructure;
@@ -7,11 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connStringBuilder = new NpgsqlConnectionStringBuilder {
   SslMode = SslMode.VerifyFull,
-  Host = builder.Configuration["DB_HOST"],
-  Port = builder.Configuration["DB_PORT"].ParseInt(),
-  Database = builder.Configuration["DB_NAME"],
-  Username = builder.Configuration["DB_USER"],
-  Password = builder.Configuration["DB_PASS"]
+  Host = builder.Configuration["Db:Host"],
+  Port = builder.Configuration["Db:Port"].ParseInt(),
+  Database = builder.Configuration["Db:Name"],
+  Username = builder.Configuration["Db:User"],
+  Password = builder.Configuration["Db:Pass"]
 };
 
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(connStringBuilder.ConnectionString);
@@ -25,13 +31,14 @@ services
     .AddDbContext<VenusDbContext>(options => {
       options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
     })
-  .AddCors()
-  .AddRazorPages();
+    .AddScoped<AuthService>()
+    .AddCors()
+    .AddRazorPages();
 
 services.AddControllers();
+services.AddHealthChecks();
 
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
-
 
 var app = builder.Build();
 
@@ -41,12 +48,25 @@ app.UseHsts();
 app.Use(async (context, next) => {
   await next();
   if (context.Response.StatusCode == 404) {
-    context.Request.Path = "/Index";
+    context.Request.Path = "/";
     await next();
   }
 });
 
 app.UseRouting();
+
+// custom jwt auth middleware
+app.UseMiddleware<AuthMiddleware>();
+
+app.UseAuthorization();
+
+app.UseExceptionHandler(configure => configure.Run(async context =>
+{
+  var error = context.Features.Get<IExceptionHandlerPathFeature>().Error;
+  await context.Response.WriteAsJsonAsync(new { message = error.Message, trace = error.StackTrace });
+}));
+
+app.UseHealthChecks("/health");
 
 app.MapStaticAssets();
 app.MapRazorPages().WithStaticAssets();

@@ -8,6 +8,8 @@
     "baseUrl": ".",
     "paths": {
       "admin/core": ["src/Administration/ClientApp/core"],
+      "venus/components": ["src/Venus/ClientApp/ts/components"],
+      "venus/core": ["src/Venus/ClientApp/ts/core"],
       "rosie/components": ["src/Shared/ClientApp/ts/components"],
       "rosie/core": ["src/Shared/ClientApp/ts/core"]
     },

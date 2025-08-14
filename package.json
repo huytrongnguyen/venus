@@ -13,7 +13,8 @@
     "rosie-build": "npm run rosie-fonts-build && npm run rosie-css-build",
     "rosie-fonts-build": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts src/Venus/wwwroot/",
     "rosie-css-build": "sass src/Shared/ClientApp/scss/index.scss src/Venus/wwwroot/rosie.css --style=compressed --no-source-map",
-    "venus-css-build": "sass src/Venus/ClientApp/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map",
+    "venus-css-build": "sass src/Venus/ClientApp/scss/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map",
+    "auth-js-build": "esbuild src/Auth/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/auth.js --loader:.tsx=tsx --format=iife --minify",
     "admin-build": "npm run admin-css-build && npm run admin-js-build",
     "admin-css-build": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
     "admin-js-build": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
@@ -40,6 +41,8 @@
   },
   "alias": {
     "admin/core": "./src/Administration/ClientApp/core",
+    "venus/components": "./src/Venus/ClientApp/ts/components",
+    "venus/core": "./src/Venus/ClientApp/ts/core",
     "rosie/components": "./src/Shared/ClientApp/ts/components",
     "rosie/core": "./src/Shared/ClientApp/ts/core"
   }
