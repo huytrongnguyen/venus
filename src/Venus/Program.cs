@@ -1,10 +1,7 @@
-using System.Security.Claims;
-using System.Text;
+using Administration;
 using Auth;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Shared;
 using Venus.Infrastructure;
@@ -28,9 +25,11 @@ var dataSource = dataSourceBuilder.Build();
 var services = builder.Services;
 
 services
-    .AddDbContext<VenusDbContext>(options => {
+    .AddDbContext<VenusDbContext>(options =>
+    {
       options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
     })
+    .AddScoped<UserService>()
     .AddScoped<AuthService>()
     .AddCors()
     .AddRazorPages();

@@ -1,4 +1,5 @@
-import { Ajax, AjaxError, DataModel, HttpParams, LocalCache, ProxyConfig, Rosie } from 'rosie/core';
+import { Ajax, AjaxError, DataModel, HttpParams, LocalCache, ProxyConfig } from 'rosie';
+import { afterProcessing, beforeProcessing } from './shared';
 
 const loginUrl = `/login`,
       verifyUrl = '/api/auth/verify?code={code}';
@@ -32,8 +33,8 @@ export class AuthDataModel<T> extends DataModel<T> {
     if (!params.headers) params.headers = {};
     params.headers[AUTH_TOKEN] = LocalCache.get(AUTH_TOKEN);
 
-    Rosie.beforeProcessing();
-    return super.fetch(params, onError ?? onAjaxError, onComplete ?? Rosie.afterProcessing);
+    beforeProcessing();
+    return super.fetch(params, onError ?? onAjaxError, onComplete ?? afterProcessing);
   }
 }
 

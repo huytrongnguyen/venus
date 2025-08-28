@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { HashRouter as Router, Navigate, Route, Routes } from 'react-router';
-import { LocalCache } from 'rosie/core';
-import { LoadingIndicator } from 'rosie/components';
+import { LocalCache } from 'rosie-ui';
+import { LoadingIndicator } from 'rosie-ui';
 import { AppNavigator } from './ux';
 import { UserGroupsView } from './user-groups.view';
 import { AUTH_TOKEN, AuthUserModel } from 'venus/core';

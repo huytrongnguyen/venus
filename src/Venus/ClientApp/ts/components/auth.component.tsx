@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { LocalCache } from 'rosie/core';
+import { LocalCache } from 'rosie';
 import { AUTH_TOKEN, AuthUser, AuthUserModel, verifyAuthUser } from 'venus/core';
 
 export function Auth() {

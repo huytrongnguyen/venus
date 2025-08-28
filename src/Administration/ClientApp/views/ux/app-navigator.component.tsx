@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 
-import { NavItem, Rosie } from 'src/Shared/ClientApp/ts/core';
+import { NavItem, Rosie } from 'rosie-ui';
 
 const navigator: NavItem[] = [{
   navId: 'access-management',

@@ -1,0 +1,3 @@
+[submodule "src/Shared/ClientApp/rosie"]
+	path = src/Shared/ClientApp/rosie
+	url = https://github.com/huytrongnguyen/rosie

@@ -14,7 +14,7 @@ namespace Venus.Controllers;
     return Ok(authUser);
   }
 
-  [HttpGet("user")] public ActionResult<object> GetAuthUser() {
+  [HttpGet("user")] [AuthFilter] public ActionResult<object> GetAuthUser() {
     var token = Request.GetAuthToken();
     var authUser = authService.GetAuthUser(token);
     if (authUser == null || authUser.Username.IsEmpty()) {

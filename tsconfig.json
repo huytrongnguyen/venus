@@ -10,8 +10,9 @@
       "admin/core": ["src/Administration/ClientApp/core"],
       "venus/components": ["src/Venus/ClientApp/ts/components"],
       "venus/core": ["src/Venus/ClientApp/ts/core"],
-      "rosie/components": ["src/Shared/ClientApp/ts/components"],
-      "rosie/core": ["src/Shared/ClientApp/ts/core"]
+      "rosie/components": ["src/Shared/ClientApp/rosie/ts/components"],
+      "rosie/core": ["src/Shared/ClientApp/rosie/ts/core"],
+      "rosie": ["src/Shared/ClientApp/rosie"]
     },
     "removeComments": true,
     "declaration": true,

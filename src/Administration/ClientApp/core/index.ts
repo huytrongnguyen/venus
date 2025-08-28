@@ -1,3 +1,5 @@
+import { Model } from 'venus/core';
+
 export type NavItem = {
   navId: string,
   navName: string,
@@ -9,6 +11,7 @@ export type NavItem = {
 
 export type SiteUser = {
   username: string,
+  name: string,
   lastLoginTime: string,
 }
 
@@ -18,4 +21,4 @@ export type UserGroup = {
   users: SiteUser[],
 }
 
-// export const UserGroupStore = Store<UserGroup>({ proxy: { url: '/api/admin/user-groups' } });
+export const UserGroupStore = Model<UserGroup[]>({ proxy: { url: '/api/users/groups' } });

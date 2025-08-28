@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { DataModel, Rosie } from 'src/Shared/ClientApp/ts/core';
-import { Grid, GridColumn, Dialog, useDialog } from 'src/Shared/ClientApp/ts/components';
-import { UserGroup } from 'admin/core';
+import { Rosie } from 'rosie-ui';
+import { DataModel } from 'rosie-ui';
+import { Grid, GridColumn, Dialog, useDialog } from 'rosie-ui';
+import { UserGroup, UserGroupStore } from 'admin/core';
+import { beforeProcessing } from 'venus/core';
 
 // https://000001.awsstudygroup.com/3-create-admin-user-and-group/
 export function UserGroupsView() {
@@ -9,7 +11,7 @@ export function UserGroupsView() {
         creationDialog = useDialog('#group-creation-dialog');
 
   useEffect(() => {
-    // UserGroupStore.load();
+    UserGroupStore.load();
   }, [])
 
   return <>
@@ -46,13 +48,13 @@ function GroupCreationDialog() {
       return;
     }
 
-    Rosie.beforeProcessing();
+    beforeProcessing();
     // UserGroupCreationModel.load({ pathParams: { groupName } });
   }
 
   return <Dialog id="group-creation-dialog" title="Group Creation Dialog">
     <div className="form-group row">
-      <label className="col-4 col-form-label text-end">Group Name</label>
+      <label className="col-4 col-form-label text-end">User group name</label>
       <div className="col-8">
         <input type="text" className="form-control" value={groupName} onChange={e => setGroupName(e.target.value)} />
       </div>

@@ -11,8 +11,9 @@
   "scripts": {
     "build": "npm run rosie-build && npm run admin-build",
     "rosie-build": "npm run rosie-fonts-build && npm run rosie-css-build",
-    "rosie-fonts-build": "cp -r node_modules/@fortawesome/fontawesome-free/webfonts src/Venus/wwwroot/",
-    "rosie-css-build": "sass src/Shared/ClientApp/scss/index.scss src/Venus/wwwroot/rosie.css --style=compressed --no-source-map",
+    "rosie-js": "cp -r src/Shared/ClientApp/rosie/dist node_modules/rosie-ui/dist/",
+    "rosie-fonts-build": "cp -r src/Shared/ClientApp/rosie/dist/webfonts src/Venus/wwwroot/",
+    "rosie-css-build": "cp src/Shared/ClientApp/rosie/dist/css/rosie.css src/Venus/wwwroot/",
     "venus-css-build": "sass src/Venus/ClientApp/scss/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map",
     "auth-js-build": "esbuild src/Auth/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/auth.js --loader:.tsx=tsx --format=iife --minify",
     "admin-build": "npm run admin-css-build && npm run admin-js-build",
@@ -21,11 +22,8 @@
     "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "7.0.0",
-    "@popperjs/core": "2.11.8",
-    "axios": "1.11.0",
-    "bootstrap": "5.3.7",
     "jquery": "3.7.1",
+    "rosie-ui": "0.2.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-router-dom": "7.7.1"
@@ -43,7 +41,8 @@
     "admin/core": "./src/Administration/ClientApp/core",
     "venus/components": "./src/Venus/ClientApp/ts/components",
     "venus/core": "./src/Venus/ClientApp/ts/core",
-    "rosie/components": "./src/Shared/ClientApp/ts/components",
-    "rosie/core": "./src/Shared/ClientApp/ts/core"
+    "rosie/components": "./src/Shared/ClientApp/rosie/ts/components",
+    "rosie/core": "./src/Shared/ClientApp/rosie/ts/core",
+    "rosie": "./src/Shared/ClientApp/rosie"
   }
 }
