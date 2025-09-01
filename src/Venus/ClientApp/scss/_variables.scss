@@ -1,0 +1,71 @@
+@use '../../../Shared/ClientApp/rosie/scss/variables' as *;
+
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+// Color system
+
+// $white:    #fff;
+// $gray-100: #f3f4f7;
+
+// $pink:    #e97b98;
+
+// $primary:       $pink;
+
+// $gray-600:    #777;
+// $gray-900:    #333;
+
+// $blue:        #3aa3e3;
+// $red:         #dc3545;
+// $yellow:      #ffc107;
+// $orange:      #ff7f00;
+// $green:       #22c283;
+// $purple:      #7a6ff1;
+// $pink:        #ea4c89;
+
+// Body (433)
+//
+// Settings for the `<body>` element.
+
+// $body-color: #3f434a;
+// $body-bg:    #fdfdfd;
+// $body-tertiary-bg:          $gray-100;
+
+// Links (449)
+//
+// Style anchor elements.
+
+// $link-hover-color: #ed95ac;
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+// $border-color: rgba(0, 0, 0, 0.125);
+
+// Typography (600)
+//
+// Font, line-height, and color for body text, headings, and more.
+// $font-family-base: Effra, Roboto, Helvetica, Open-Sans, Arial, sans-serif;
+$font-size-base:              1rem; // Assumes the browser default, typically `16px`
+$font-size-sm:                $font-size-base * .875;
+$font-size-lg:                $font-size-base * 1.25;
+// $font-weight-base: 300;
+
+// Navs (1156)
+
+$nav-link-padding-y:                .5rem;
+$nav-link-padding-x:                1rem;
+
+// Navbar (1187)
+
+$navbar-brand-font-size:            $font-size-lg;
+
+// Breadcrumb (1631)
+
+// $breadcrumb-padding-y: .25rem;
+// $breadcrumb-padding-x: .5rem;
+// $breadcrumb-margin-bottom: 0;
+// $breadcrumb-height: 40px;

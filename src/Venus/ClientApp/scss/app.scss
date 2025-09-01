@@ -1,14 +1,10 @@
-@use '../../Shared/ClientApp/rosie/scss/variables' as *;
+@use 'variables' as *;
 
-aside {
-  .nav-link {
-    &:not(.active) {
-      &:hover { background-color: $list-group-hover-bg; }
-    }
-    &.active {
-      color: $white;
-      background-color: $primary;
-      cursor: default;
+header.card-header {
+  .nav-tabs {
+    .nav-title {
+      font-size: $navbar-brand-font-size;
+      padding: calc($nav-link-padding-y / 2) calc($nav-link-padding-x / 2);
     }
   }
 }

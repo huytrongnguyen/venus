@@ -9,17 +9,17 @@
   },
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
-    "build": "npm run rosie-build && npm run admin-build",
-    "rosie-build": "npm run rosie-fonts-build && npm run rosie-css-build",
-    "rosie-js": "cp -r src/Shared/ClientApp/rosie/dist node_modules/rosie-ui/dist/",
-    "rosie-fonts-build": "cp -r src/Shared/ClientApp/rosie/dist/webfonts src/Venus/wwwroot/",
-    "rosie-css-build": "cp src/Shared/ClientApp/rosie/dist/css/rosie.css src/Venus/wwwroot/",
-    "venus-css-build": "sass src/Venus/ClientApp/scss/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map",
-    "auth-js-build": "esbuild src/Auth/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/auth.js --loader:.tsx=tsx --format=iife --minify",
+    "build": "npm run rosie-build && npm run venus-build && npm run admin-build",
+    "rosie-build": "npm run rosie-copy && npm run rosie-css-copy",
+    "rosie-copy": "cp -r src/Shared/ClientApp/rosie/dist node_modules/rosie-ui/",
+    "rosie-fonts-copy": "cp -r node_modules/rosie-ui/dist/webfonts src/Venus/wwwroot",
+    "rosie-css-copy": "cp node_modules/rosie-ui/dist/css/rosie.css src/Venus/wwwroot/",
     "admin-build": "npm run admin-css-build && npm run admin-js-build",
     "admin-css-build": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
     "admin-js-build": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
-    "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch"
+    "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch",
+    "auth-build": "esbuild src/Auth/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/auth.js --loader:.tsx=tsx --format=iife --minify",
+    "venus-build": "sass src/Venus/ClientApp/scss/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map"
   },
   "dependencies": {
     "jquery": "3.7.1",
@@ -29,7 +29,6 @@
     "react-router-dom": "7.7.1"
   },
   "devDependencies": {
-    "@types/bootstrap": "5.2.10",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "@types/react-router-dom": "5.3.3",
