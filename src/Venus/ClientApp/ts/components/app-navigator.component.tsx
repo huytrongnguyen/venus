@@ -3,34 +3,19 @@ import { Link, useLocation } from 'react-router';
 
 import { NavItem, Rosie } from 'rosie-ui';
 
-const navigator: NavItem[] = [{
-  navId: 'access-management',
-  navName: 'Access management',
-  children: [{
-    navId: 'user-groups',
-    navName: 'User groups',
-    navPath: '/'
-  }, {
-    navId: 'users',
-    navName: 'Users',
-    navPath: '/users'
-  }]
-
-}]
-
-export function AppNavigator() {
+export function AppNavigator(props: { navigator: NavItem[] }) {
   const location = useLocation(),
         [navigation, setNavigation] = useState([] as NavItem[]);
 
   useEffect(() => {
-    setNavigation(navigator);
+    setNavigation(props.navigator);
   }, []);
 
   return <nav className="d-flex flex-column">
     {navigation.map(navItem => {
       if (navItem.children && navItem.children.length > 0) {
         return <Fragment key={navItem.navId}>
-          <div className="nav-link disabled text-body-tertiary fw-bold p-1">{navItem.navName}</div>
+          <div className="nav-link disabled text-body-tertiary text-uppercase fw-bold p-1">{navItem.navName}</div>
           {navItem.children.map(childNavItem => {
             return <NavigationLink key={childNavItem.navId} isChild navItem={childNavItem} active={location?.pathname.startsWith(childNavItem.navPath)} />
           })}

@@ -9,12 +9,14 @@
   },
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
-    "build": "npm run rosie-build && npm run venus-build && npm run admin-build",
+    "build": "npm run rosie-build && npm run venus-build",
     "rosie-build": "npm run rosie-copy && npm run rosie-css-copy",
     "rosie-copy": "cp -r src/Shared/ClientApp/rosie/dist node_modules/rosie-ui/",
     "rosie-fonts-copy": "cp -r node_modules/rosie-ui/dist/webfonts src/Venus/wwwroot",
     "rosie-css-copy": "cp node_modules/rosie-ui/dist/css/rosie.css src/Venus/wwwroot/",
-    "admin-build": "npm run admin-css-build && npm run admin-js-build",
+    "features-build": "npm run features-js-build",
+    "features-js-build": "esbuild src/Features/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/features.js --loader:.tsx=tsx --format=iife --minify",
+    "admin-build": "npm run admin-js-build",
     "admin-css-build": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
     "admin-js-build": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
     "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch",
@@ -37,6 +39,7 @@
     "typescript": "5.8.3"
   },
   "alias": {
+    "features/core": "./src/Features/ClientApp/core",
     "admin/core": "./src/Administration/ClientApp/core",
     "venus/components": "./src/Venus/ClientApp/ts/components",
     "venus/core": "./src/Venus/ClientApp/ts/core",

@@ -1,13 +1,5 @@
+import { NavItem } from 'rosie-ui';
 import { Model } from 'venus/core';
-
-export type NavItem = {
-  navId: string,
-  navName: string,
-  navPath?: string,
-  navIcon?: string,
-  children?: NavItem[],
-  groups?: any[],
-}
 
 export type SiteUser = {
   username: string,
@@ -22,3 +14,17 @@ export type UserGroup = {
 }
 
 export const UserGroupStore = Model<UserGroup[]>({ proxy: { url: '/api/users/groups' } });
+
+export const navigator: NavItem[] = [{
+  navId: 'access-management',
+  navName: 'Access management',
+  children: [{
+    navId: 'user-groups',
+    navName: 'User groups',
+    navPath: '/'
+  }, {
+    navId: 'users',
+    navName: 'Users',
+    navPath: '/users'
+  }]
+}]

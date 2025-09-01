@@ -1,5 +1,6 @@
 using Administration;
 using Auth;
+using Features;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -25,10 +26,10 @@ var dataSource = dataSourceBuilder.Build();
 var services = builder.Services;
 
 services
-    .AddDbContext<VenusDbContext>(options =>
-    {
+    .AddDbContext<VenusDbContext>(options => {
       options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
     })
+    .AddScoped<ChatService>()
     .AddScoped<UserService>()
     .AddScoped<AuthService>()
     .AddCors()
@@ -59,8 +60,7 @@ app.UseMiddleware<AuthMiddleware>();
 
 app.UseAuthorization();
 
-app.UseExceptionHandler(configure => configure.Run(async context =>
-{
+app.UseExceptionHandler(configure => configure.Run(async context => {
   var error = context.Features.Get<IExceptionHandlerPathFeature>().Error;
   await context.Response.WriteAsJsonAsync(new { message = error.Message, trace = error.StackTrace });
 }));
