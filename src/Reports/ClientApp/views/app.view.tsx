@@ -6,7 +6,7 @@ import { AUTH_TOKEN, AuthUserModel } from 'venus/core';
 import { AppLayout, RequireAuth } from 'venus/components';
 import { navigator } from 'reports/core';
 
-import { AuditLogsView } from './audit-logs.view';
+import { CampaignPerformanceView } from './campaign-performance.view';
 
 export function AppView() {
   useEffect(() => {
@@ -17,8 +17,9 @@ export function AppView() {
 
   return <Router>
     <AppLayout navigator={navigator} routes={<Routes>
-      <Route path="/audit-logs" element={<RequireAuth component={AuditLogsView} title="Audit Logs" />} />
-      <Route path="*" element={<Navigate to="/audit-logs" />} />
+      <Route path="/apps/:appId/campaign-performance" element={<RequireAuth component={CampaignPerformanceView} title="Campaign Performance" />} />
+      <Route path="/apps/campaign-performance" element={<Navigate to="/apps/demo/campaign-performance" />} />
+      <Route path="*" element={<Navigate to="/apps/campaign-performance" />} />
     </Routes>} />
   </Router>
 }

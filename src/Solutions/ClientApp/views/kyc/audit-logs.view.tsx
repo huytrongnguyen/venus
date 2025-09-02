@@ -19,7 +19,7 @@ export function AuditLogsView() {
           <div className="input-group-text"><span className="fa fa-calendar"></span></div>
           <input type="text" className="form-control text-center" value={startDate.format('yyyy-MM-dd')} />
           <input type="text" className="form-control text-center" value={endDate.format('yyyy-MM-dd')} />
-          <button className="btn btn-outline-secondary">Search</button>
+          <button className="btn btn-outline-secondary">Apply</button>
         </div>
       </div>
     </ol>

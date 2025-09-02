@@ -33,15 +33,31 @@ export type AuditLog = {
 }
 
 export const navigator: NavItem[] = [{
-  navId: 'chat',
-  navName: 'Chat',
-  navPath: '/chat'
-}, {
   navId: 'kyc',
   navName: 'KYC',
   children: [{
+    navId: 'auto-approval',
+    navName: 'Auto Approval',
+    navPath: '/kyc/auto-approval'
+  }, {
     navId: 'audit-logs',
     navName: 'Audit Logs',
     navPath: '/kyc/audit-logs'
   }]
+}, {
+  navId: 'misc',
+  navName: 'Misc',
+  children: [{
+    navId: 'chat',
+    navName: 'Chat',
+    navPath: '/chat',
+  }]
 }]
+
+export function generateRequestId() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0,
+          v = c == "x" ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}

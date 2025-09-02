@@ -10,7 +10,7 @@
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
     "build": "npm run rosie-build && npm run venus-build",
-    "watch": "esbuild src/Solutions/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/solutions.js --loader:.tsx=tsx --format=iife --watch",
+    "watch": "esbuild src/Reports/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/reports.js --loader:.tsx=tsx --format=iife --watch",
     "rosie-build": "npm run rosie-copy && npm run rosie-css-copy",
     "rosie-copy": "cp -r src/Shared/ClientApp/rosie/dist node_modules/rosie-ui/",
     "rosie-fonts-copy": "cp -r node_modules/rosie-ui/dist/webfonts src/Venus/wwwroot",

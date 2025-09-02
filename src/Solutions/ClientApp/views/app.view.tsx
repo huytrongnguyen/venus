@@ -7,7 +7,7 @@ import { AppLayout, RequireAuth } from 'venus/components';
 import { navigator } from 'solutions/core';
 
 import { ChatView } from './chat.view';
-import { AuditLogsView } from './kyc';
+import { AuditLogsView, AutoApprovalView } from './kyc';
 
 export function AppView() {
   useEffect(() => {
@@ -20,6 +20,7 @@ export function AppView() {
     <AppLayout navigator={navigator} routes={<Routes>
       <Route path="/chat" element={<RequireAuth component={ChatView} title="Chat" />} />
       <Route path="/kyc/audit-logs" element={<RequireAuth component={AuditLogsView} title="KYC Audit Logs" />} />
+      <Route path="/kyc/auto-approval" element={<RequireAuth component={AutoApprovalView} title="KYC Auto Approval" />} />
       <Route path="*" element={<Navigate to="/chat" />} />
     </Routes>} />
   </Router>

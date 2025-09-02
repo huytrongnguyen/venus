@@ -1,5 +1,8 @@
 import { ReactElement } from 'react';
-import { LoadingIndicator, NavItem } from 'rosie-ui';
+import { LoadingIndicator } from 'rosie-ui';
+
+import { NavItem } from 'venus/core';
+
 import { AppNavigator } from './app-navigator.component';
 
 export function AppLayout(props: { navigator: NavItem[], routes: ReactElement }) {

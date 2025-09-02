@@ -25843,7 +25843,7 @@
   var import_client = __toESM(require_client());
 
   // src/Solutions/ClientApp/views/app.view.tsx
-  var import_react13 = __toESM(require_react());
+  var import_react14 = __toESM(require_react());
 
   // node_modules/react-router/dist/development/chunk-C37GKA54.mjs
   var React = __toESM(require_react(), 1);
@@ -45023,18 +45023,32 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
 
   // src/Solutions/ClientApp/core/index.ts
   var navigator2 = [{
-    navId: "chat",
-    navName: "Chat",
-    navPath: "/chat"
-  }, {
     navId: "kyc",
     navName: "KYC",
     children: [{
+      navId: "auto-approval",
+      navName: "Auto Approval",
+      navPath: "/kyc/auto-approval"
+    }, {
       navId: "audit-logs",
       navName: "Audit Logs",
       navPath: "/kyc/audit-logs"
     }]
+  }, {
+    navId: "misc",
+    navName: "Misc",
+    children: [{
+      navId: "chat",
+      navName: "Chat",
+      navPath: "/chat"
+    }]
   }];
+  function generateRequestId() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+      const r = Math.random() * 16 | 0, v = c == "x" ? r : r & 3 | 8;
+      return v.toString(16);
+    });
+  }
 
   // src/Solutions/ClientApp/views/chat.view.tsx
   var import_react11 = __toESM(require_react());
@@ -45171,24 +45185,54 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ] });
   }
 
-  // src/Solutions/ClientApp/views/app.view.tsx
+  // src/Solutions/ClientApp/views/kyc/auto-approval.view.tsx
+  var import_react13 = __toESM(require_react());
   var import_jsx_runtime19 = __toESM(require_jsx_runtime());
+  function AutoApprovalView() {
+    const [step, setStep] = (0, import_react13.useState)(1), [requestId] = (0, import_react13.useState)(generateRequestId());
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(import_jsx_runtime19.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item active", children: "Auto Approval" }),
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("button", { type: "button", className: "btn btn-sm btn-outline-secondary", onClick: () => location.reload(), children: "Refresh" }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("main", { className: "fullscreen overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "container-fluid", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "col-12 col-md-3", children: [
+        step === 1 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(TakeIdImage, { requestId }),
+        step === 2 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(TakeIdImage, { requestId }),
+        step === 3 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(TakeSelfieImage, { requestId }),
+        step === 4 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Verification, { requestId })
+      ] }) }) }) })
+    ] });
+  }
+  function TakeIdImage(props) {
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_jsx_runtime19.Fragment, {});
+  }
+  function TakeSelfieImage(props) {
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_jsx_runtime19.Fragment, {});
+  }
+  function Verification(props) {
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_jsx_runtime19.Fragment, {});
+  }
+
+  // src/Solutions/ClientApp/views/app.view.tsx
+  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
   function AppView() {
-    (0, import_react13.useEffect)(() => {
+    (0, import_react14.useEffect)(() => {
       if (LocalCache.get(AUTH_TOKEN)) {
         AuthUserModel.load();
       }
     }, []);
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(HashRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(AppLayout, { navigator: navigator2, routes: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(Routes, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Route, { path: "/chat", element: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(RequireAuth, { component: ChatView, title: "Chat" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Route, { path: "/kyc/audit-logs", element: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(RequireAuth, { component: AuditLogsView, title: "KYC Audit Logs" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Navigate, { to: "/chat" }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(HashRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(AppLayout, { navigator: navigator2, routes: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(Routes, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "/chat", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(RequireAuth, { component: ChatView, title: "Chat" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "/kyc/audit-logs", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(RequireAuth, { component: AuditLogsView, title: "KYC Audit Logs" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "/kyc/auto-approval", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(RequireAuth, { component: AutoApprovalView, title: "KYC Auto Approval" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Navigate, { to: "/chat" }) })
     ] }) }) });
   }
 
   // src/Solutions/ClientApp/app.tsx
-  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
-  (0, import_client.createRoot)(document.getElementById("react-root")).render(/* @__PURE__ */ (0, import_jsx_runtime20.jsx)(AppView, {}));
+  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
+  (0, import_client.createRoot)(document.getElementById("react-root")).render(/* @__PURE__ */ (0, import_jsx_runtime21.jsx)(AppView, {}));
 })();
 /*! Bundled license information:
 

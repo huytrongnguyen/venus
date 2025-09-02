@@ -1,11 +1,12 @@
-import { NavItem } from 'rosie-ui';
+import { NavItem } from 'venus/core';
 
 export const navigator: NavItem[] = [{
-  navId: 'reports',
-  navName: 'Reports',
+  navId: 'apps',
+  navName: 'Apps',
   children: [{
-    navId: 'audit-logs',
-    navName: 'Audit Logs',
-    navPath: '/audit-logs'
-  }]
+    navId: 'campaign-performance',
+    navName: 'Campaign Performance',
+    navPath: '/apps/campaign-performance',
+    activeFn: path => path.endsWith('/campaign-performance'),
+  }],
 }]
