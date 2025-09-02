@@ -4,10 +4,9 @@ import { LocalCache } from 'rosie-ui';
 
 import { AUTH_TOKEN, AuthUserModel } from 'venus/core';
 import { AppLayout, RequireAuth } from 'venus/components';
-import { navigator } from 'features/core';
+import { navigator } from 'reports/core';
 
-import { ChatView } from './chat.view';
-import { AuditLogsView } from './kyc';
+import { AuditLogsView } from './audit-logs.view';
 
 export function AppView() {
   useEffect(() => {
@@ -18,9 +17,8 @@ export function AppView() {
 
   return <Router>
     <AppLayout navigator={navigator} routes={<Routes>
-      <Route path="/chat" element={<RequireAuth component={ChatView} title="Chat" />} />
-      <Route path="/kyc/audit-logs" element={<RequireAuth component={AuditLogsView} title="KYC Audit Logs" />} />
-      <Route path="*" element={<Navigate to="/chat" />} />
+      <Route path="/audit-logs" element={<RequireAuth component={AuditLogsView} title="Audit Logs" />} />
+      <Route path="*" element={<Navigate to="/audit-logs" />} />
     </Routes>} />
   </Router>
 }

@@ -26,9 +26,11 @@ var dataSource = dataSourceBuilder.Build();
 var services = builder.Services;
 
 services
-    .AddDbContext<VenusDbContext>(options => {
+    .AddDbContext<VenusDbContext>(options =>
+    {
       options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
     })
+    .AddScoped<KycService>()
     .AddScoped<ChatService>()
     .AddScoped<UserService>()
     .AddScoped<AuthService>()

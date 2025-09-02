@@ -10,16 +10,17 @@
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
     "build": "npm run rosie-build && npm run venus-build",
+    "watch": "esbuild src/Features/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/features.js --loader:.tsx=tsx --format=iife --watch",
     "rosie-build": "npm run rosie-copy && npm run rosie-css-copy",
     "rosie-copy": "cp -r src/Shared/ClientApp/rosie/dist node_modules/rosie-ui/",
     "rosie-fonts-copy": "cp -r node_modules/rosie-ui/dist/webfonts src/Venus/wwwroot",
     "rosie-css-copy": "cp node_modules/rosie-ui/dist/css/rosie.css src/Venus/wwwroot/",
-    "features-build": "npm run features-js-build",
-    "features-js-build": "esbuild src/Features/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/features.js --loader:.tsx=tsx --format=iife --minify",
+    "reports-build": "esbuild src/Reports/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/reports.js --loader:.tsx=tsx --format=iife --minify",
+    "load-build": "esbuild src/Load/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/load.js --loader:.tsx=tsx --format=iife --minify",
+    "features-build": "esbuild src/Features/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/features.js --loader:.tsx=tsx --format=iife --minify",
     "admin-build": "npm run admin-js-build",
     "admin-css-build": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
     "admin-js-build": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
-    "admin-js-watch": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --watch",
     "auth-build": "esbuild src/Auth/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/auth.js --loader:.tsx=tsx --format=iife --minify",
     "venus-build": "sass src/Venus/ClientApp/scss/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map"
   },
@@ -39,6 +40,7 @@
     "typescript": "5.8.3"
   },
   "alias": {
+    "reports/core": "./src/Reports/ClientApp/core",
     "features/core": "./src/Features/ClientApp/core",
     "admin/core": "./src/Administration/ClientApp/core",
     "venus/components": "./src/Venus/ClientApp/ts/components",

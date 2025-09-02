@@ -6,12 +6,42 @@ export type Message = {
   sessionId: string,
 }
 
+export type Ocr = {
+  ssn: string,
+  name: string,
+  dob: string,
+  gender: string,
+  address: string,
+  givenDate: string,
+  givenPlace: string,
+  dueDate: string,
+}
+
+export type FaceMatching = {
+  matched: boolean,
+  confidence: number,
+}
+
+export type AuditLog = {
+  requestId: string,
+  requestDate: string,
+  front: string,
+  back: string,
+  selfie: string,
+  ocr: Ocr,
+  faceMatching: FaceMatching,
+}
+
 export const navigator: NavItem[] = [{
-  navId: 'features',
-  navName: 'Features',
+  navId: 'chat',
+  navName: 'Chat',
+  navPath: '/chat'
+}, {
+  navId: 'kyc',
+  navName: 'KYC',
   children: [{
-    navId: 'chat',
-    navName: 'Chat',
-    navPath: '/chat'
+    navId: 'audit-logs',
+    navName: 'Audit Logs',
+    navPath: '/kyc/audit-logs'
   }]
 }]

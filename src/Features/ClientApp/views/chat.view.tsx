@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Message } from 'features/core';
 import { Rosie } from 'rosie-ui';
 
@@ -6,6 +6,11 @@ export function ChatView() {
   const [sessionId] = useState(Rosie.guid()),
         [question, setQuestion] = useState(''),
         [conversation, setConversation] = useState<Message[]>([]);
+
+  useEffect(() => {
+    const chatHistory = document.getElementById('chat-history');
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+  }, [conversation])
 
   function send() {
     if (!question.trim()) return;
@@ -36,11 +41,11 @@ export function ChatView() {
       <li className="breadcrumb-item active">Chat</li>
     </ol>
     <main className="fullscreen d-flex flex-column">
-      <div className="fullscreen d-flex flex-column chat-body">
+      <div id="chat-history" className="fullscreen d-flex flex-column chat-body overflow-y-auto p-2">
         {conversation.map((message, index) => {
           if (!message.content) return null;
           return <Fragment key={index}>
-            <div className={`d-flex ${message.type} mb-2 p-2`}>
+            <div className={`d-flex ${message.type} mb-2`}>
               <div className="card">
                 <div className="card-body p-2">{message.content}</div>
               </div>
