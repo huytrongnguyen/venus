@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Message } from 'features/core';
+import { Message } from 'solutions/core';
 import { Rosie } from 'rosie-ui';
 
 export function ChatView() {
@@ -37,7 +37,6 @@ export function ChatView() {
 
   return <>
     <ol className="breadcrumb">
-      <li className="breadcrumb-item">Features</li>
       <li className="breadcrumb-item active">Chat</li>
     </ol>
     <main className="fullscreen d-flex flex-column">

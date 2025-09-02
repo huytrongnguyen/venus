@@ -1,4 +1,4 @@
-﻿namespace Features;
+﻿namespace Solutions;
 
 public class ChatService {
 

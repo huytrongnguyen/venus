@@ -1,10 +1,10 @@
 using Administration;
 using Auth;
-using Features;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Shared;
+using Solutions;
 using Venus.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);

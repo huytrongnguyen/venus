@@ -8,7 +8,7 @@
     <ProjectReference Include="..\Load\Load.csproj" />
     <ProjectReference Include="..\Search\Search.csproj" />
     <ProjectReference Include="..\Auth\Auth.csproj" />
-    <ProjectReference Include="..\Features\Features.csproj" />
+    <ProjectReference Include="..\Solutions\Solutions.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

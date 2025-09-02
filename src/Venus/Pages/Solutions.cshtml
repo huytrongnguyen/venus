@@ -1,0 +1,10 @@
+@page
+@{
+  ViewData["ActivePage"] = "Solutions";
+}
+
+<div id="react-root" class="fullscreen"></div>
+
+@section Scripts {
+  <script src="/solutions.js?dc=@(DateTime.Now.Ticks)"></script>
+}

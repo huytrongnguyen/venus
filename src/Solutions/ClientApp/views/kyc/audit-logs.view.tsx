@@ -1,15 +1,14 @@
-import { AuditLog, FaceMatching, Ocr } from 'features/core';
 import { useState } from 'react';
 import { Grid, GridColumn } from 'rosie-ui';
+import { AuditLog, FaceMatching, Ocr } from 'solutions/core';
 
 export function AuditLogsView() {
   const [endDate, setEndDate] = useState(Date.currentDate().minus(1)),
         [startDate, setStartDate] = useState(endDate.minus(7)),
-        [auditLogs, setAuditLogs] = useState([]),
-        [totalPage, setTotalPage] = useState(1),
-        [total, setTotal] = useState(1),
         [page, setPage] = useState(1),
-        [size, setSize] = useState(10);
+        [size, setSize] = useState(10),
+        [total, setTotal] = useState(1),
+        [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
 
   return <>
     <ol className="breadcrumb">

@@ -8,7 +8,7 @@
     "baseUrl": ".",
     "paths": {
       "reports/core": ["src/Reports/ClientApp/core"],
-      "features/core": ["src/Features/ClientApp/core"],
+      "solutions/core": ["src/Solutions/ClientApp/core"],
       "admin/core": ["src/Administration/ClientApp/core"],
       "venus/components": ["src/Venus/ClientApp/ts/components"],
       "venus/core": ["src/Venus/ClientApp/ts/core"],

@@ -4,7 +4,7 @@ import { LocalCache } from 'rosie-ui';
 
 import { AUTH_TOKEN, AuthUserModel } from 'venus/core';
 import { AppLayout, RequireAuth } from 'venus/components';
-import { navigator } from 'features/core';
+import { navigator } from 'solutions/core';
 
 import { ChatView } from './chat.view';
 import { AuditLogsView } from './kyc';

@@ -65,7 +65,7 @@ public class AuthService(IConfiguration configuration, ILogger<AuthService> logg
   }
 
   private AuthVerifyResponse Verify(string code) {
-    var verifyUrl = "https://oauth2.googleapis.com/token";
+    // var verifyUrl = "https://oauth2.googleapis.com/token";
     var body = new Dictionary<string, string> {
       { "code", code },
       { "client_id", ClientId },
@@ -81,8 +81,8 @@ public class AuthService(IConfiguration configuration, ILogger<AuthService> logg
   }
 
   private AuthUserInfoResponse GetUserInfo(string idToken, string accessToken) {
-    var userInfoUrl = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + accessToken;
-    var userInfoHeader = new Dictionary<string, string> { { "Authorization", $"Bearer {idToken}" } };
+    // var userInfoUrl = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + accessToken;
+    // var userInfoHeader = new Dictionary<string, string> { { "Authorization", $"Bearer {idToken}" } };
     return new AuthUserInfoResponse("1", "test", "test@venus.com"); // mock user info
   }
 

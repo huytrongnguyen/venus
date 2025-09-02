@@ -8,9 +8,9 @@ namespace Auth;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class AuthFilterAttribute : Attribute, IAuthorizationFilter {
   public void OnAuthorization(AuthorizationFilterContext context) {
-    var user = (AuthUser) context.HttpContext.Items["User"];
+    var user = context.HttpContext.Items["User"];
 
-    if (user == null || user.Username.IsEmpty()) {
+    if (user == null || ((AuthUser)user).Username.IsEmpty()) {
       // not logged in
       context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
     }
