@@ -1,4 +1,4 @@
-import { NavItem } from 'rosie-ui';
+import { NavItem } from 'venus/core';
 
 export type Message = {
   type: string,
@@ -33,6 +33,30 @@ export type AuditLog = {
 }
 
 export const navigator: NavItem[] = [{
+  navId: 'ua',
+  navName: 'User Acquisition',
+  children: [{
+    navId: 'segment-tools',
+    navName: 'Segment Tools',
+    navPath: '/ua/segment-tools'
+  }, {
+    navId: 'custom-audiences',
+    navName: 'Custom Audiences',
+    navPath: '/ua/custom-audiences'
+  }]
+}, {
+  navId: 'ai',
+  navName: 'AI Features',
+  children: [{
+    navId: 'fraud',
+    navName: 'Fraud Detection',
+    navPath: '/ai/fraud'
+  }, {
+    navId: 'churn',
+    navName: 'Churn Detection',
+    navPath: '/ai/churn'
+  }]
+}, {
   navId: 'kyc',
   navName: 'KYC',
   children: [{

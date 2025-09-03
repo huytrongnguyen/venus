@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, GridColumn } from 'rosie-ui';
+import { DateRangePicker, Grid, GridColumn } from 'rosie-ui';
 import { AuditLog, FaceMatching, Ocr } from 'solutions/core';
 
 export function AuditLogsView() {
@@ -15,12 +15,8 @@ export function AuditLogsView() {
       <li className="breadcrumb-item">KYC</li>
       <li className="breadcrumb-item active">Audit Logs</li>
       <div className="ms-auto">
-        <div className="input-group input-group-sm">
-          <div className="input-group-text"><span className="fa fa-calendar"></span></div>
-          <input type="text" className="form-control text-center" value={startDate.format('yyyy-MM-dd')} />
-          <input type="text" className="form-control text-center" value={endDate.format('yyyy-MM-dd')} />
-          <button className="btn btn-outline-secondary">Apply</button>
-        </div>
+        <DateRangePicker className="input-group-sm" start={startDate} end={endDate}
+            onChange={(start: Date, end: Date) => { setStartDate(start); setEndDate(end); }} />
       </div>
     </ol>
     <main className="fullscreen">

@@ -1,0 +1,30 @@
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { DatePicker, Dictionary, Grid, GridColumn } from 'rosie-ui';
+
+export function ChurnDetectionView() {
+  const [reportDate, setReportDate] = useState(Date.currentDate().minus(1));
+
+  return <>
+    <ol className="breadcrumb">
+      <li className="breadcrumb-item">AI Features</li>
+      <li className="breadcrumb-item active">Churn Detection</li>
+      <div className="d-flex flex-row ms-auto">
+        <NavLink to={`/ua/custom-audiences`} className="btn btn-sm btn-outline-secondary me-2" style={{width:300}}>Create Custom Audiences</NavLink>
+        <DatePicker className="input-group-sm" value={reportDate} onChange={setReportDate} />
+      </div>
+    </ol>
+    <main className="fullscreen d-flex flex-row">
+      <div className="w-25"></div>
+      <div className="fullscreen w-75">
+        <Grid fitHeight>
+          <GridColumn headerName="Report Date" field="reportDate" style={{width:150}} />
+          <GridColumn headerName="User ID" field="userId" style={{width:150}} />
+          <GridColumn headerName="Platform" field="platform" style={{width:150}} />
+          <GridColumn headerName="Churn Level" field="fraudLevel" style={{width:150}} />
+          <GridColumn headerName="Probability" field="fraudProba" style={{width:150}} />
+        </Grid>
+      </div>
+    </main>
+  </>
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { DateRangePicker } from 'rosie-ui';
+import { DateRangePicker, Grid, GridColumn } from 'rosie-ui';
 
 export function CampaignPerformanceView() {
   const { appId } = useParams<{ appId: string }>(),
@@ -18,6 +18,21 @@ export function CampaignPerformanceView() {
       </div>
     </ol>
     <main className="fullscreen">
+      <Grid fitHeight>
+        <GridColumn headerName="Media Source" field="mediaSource" style={{width:150}} />
+        <GridColumn headerName="Campaign" field="campaignName" style={{width:150}} />
+        <GridColumn headerName="Adset" field="adsetName" style={{width:150}} />
+        <GridColumn headerName="Ad" field="adName" style={{width:150}} />
+        <GridColumn headerName="Revenue" field="revenue" style={{width:200}} />
+        <GridColumn headerName="Cost" field="cost" style={{width:200}} />
+        <GridColumn headerName="Impressions" field="impressions" style={{width:200}} />
+        <GridColumn headerName="Clicks" field="clicks" style={{width:200}} />
+        <GridColumn headerName="Installs" field="installs" style={{width:200}} />
+        <GridColumn headerName="NRU" field="installs" style={{width:200}} />
+        <GridColumn headerName="NPU" field="installs" style={{width:200}} />
+        <GridColumn headerName="CPA" field="installs" style={{width:200}} />
+        <GridColumn headerName="ROAS" field="installs" style={{width:200}} />
+      </Grid>
     </main>
   </>
 }

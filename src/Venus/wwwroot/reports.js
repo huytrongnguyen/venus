@@ -36532,18 +36532,118 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
 
   // node_modules/rosie-ui/dist/js/components/paging-toolbar.component.js
   var import_jsx_runtime3 = __toESM(require_jsx_runtime());
+  function PagingToolbar(props) {
+    var _a = props.page, page = _a === void 0 ? 1 : _a, _b = props.size, size = _b === void 0 ? 100 : _b, _c = props.count, count = _c === void 0 ? 0 : _c, _d = props.total, total = _d === void 0 ? 0 : _d, totalPage = (total / size).floor() + (total % size > 0 ? 1 : 0);
+    return (0, import_jsx_runtime3.jsxs)(import_jsx_runtime3.Fragment, { children: [(0, import_jsx_runtime3.jsxs)("div", { className: "mt-1 me-auto", children: ["Display records ", !count ? 0 : (page - 1) * size + 1, " - ", Math.min(page * size, (page - 1) * size + count), " of ", total] }), (0, import_jsx_runtime3.jsxs)("ul", { className: "pagination pagination-sm mb-0", children: [(0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page <= 1 }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-step-backward" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page - 1 < 1 }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-play fa-rotate-180" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: "page-item active", children: (0, import_jsx_runtime3.jsxs)("span", { className: "page-link", children: [!totalPage ? 0 : page, " / ", totalPage] }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page + 1 > totalPage }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-play" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page >= totalPage }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-step-forward" }) }) })] })] });
+  }
 
   // node_modules/rosie-ui/dist/js/components/grid/grid.component.js
   var import_jsx_runtime6 = __toESM(require_jsx_runtime());
   var import_react4 = __toESM(require_react());
 
-  // node_modules/rosie-ui/dist/js/components/grid/grid-cell.component.js
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var import_react2 = __toESM(require_react());
-
   // node_modules/rosie-ui/dist/js/components/grid/grid-row.component.js
   var import_jsx_runtime5 = __toESM(require_jsx_runtime());
   var import_react3 = __toESM(require_react());
+
+  // node_modules/rosie-ui/dist/js/components/grid/grid-cell.component.js
+  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
+  var import_react2 = __toESM(require_react());
+  var __assign2 = function() {
+    __assign2 = Object.assign || function(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+          t[p] = s[p];
+      }
+      return t;
+    };
+    return __assign2.apply(this, arguments);
+  };
+  var __rest = function(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+      t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+          t[p[i]] = s[p[i]];
+      }
+    return t;
+  };
+  function GridCell(props) {
+    var _a;
+    var field = props.field, headerName = props.headerName, className = props.className, renderer = props.renderer, rowIndex = props.rowIndex, colIndex = props.colIndex, header = props.header, others = __rest(props, ["field", "headerName", "className", "renderer", "rowIndex", "colIndex", "header"]), cellCls = Rosie.classNames("rosie-grid-cell p-1", className);
+    if (header) {
+      return (0, import_jsx_runtime4.jsx)("div", __assign2({ className: cellCls }, others, { children: headerName !== null && headerName !== void 0 ? headerName : field }));
+    }
+    var _b = (0, import_react2.useState)((_a = props.record) === null || _a === void 0 ? void 0 : _a.get(field)), fieldValue = _b[0], setFieldValue = _b[1];
+    (0, import_react2.useEffect)(function() {
+      var _a2;
+      setFieldValue((_a2 = props.record) === null || _a2 === void 0 ? void 0 : _a2.get(field));
+    }, [props.record]);
+    function getDisplayValue() {
+      if (renderer)
+        return renderer(fieldValue, props.record, rowIndex, colIndex);
+      return fieldValue;
+    }
+    return (0, import_jsx_runtime4.jsx)(import_jsx_runtime4.Fragment, { children: (0, import_jsx_runtime4.jsx)("div", __assign2({ className: Rosie.classNames(cellCls) }, others, { children: getDisplayValue() })) });
+  }
+
+  // node_modules/rosie-ui/dist/js/components/grid/grid-row.component.js
+  var __assign3 = function() {
+    __assign3 = Object.assign || function(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+          t[p] = s[p];
+      }
+      return t;
+    };
+    return __assign3.apply(this, arguments);
+  };
+  function GridRow(props) {
+    var record = props.record, rowIndex = props.rowIndex, columns = props.columns, checkboxSelection = props.checkboxSelection, _a = (0, import_react3.useState)(false), selected = _a[0], setSelected = _a[1];
+    return (0, import_jsx_runtime5.jsx)(import_jsx_runtime5.Fragment, { children: (0, import_jsx_runtime5.jsx)("div", { className: Rosie.classNames("rosie-grid-row d-flex flex-row", { selected }), children: columns.map(function(col, colIndex) {
+      return (0, import_jsx_runtime5.jsx)(GridCell, __assign3({ record, rowIndex, colIndex }, col), colIndex);
+    }) }) });
+  }
+
+  // node_modules/rosie-ui/dist/js/components/grid/grid.component.js
+  var __assign4 = function() {
+    __assign4 = Object.assign || function(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+          t[p] = s[p];
+      }
+      return t;
+    };
+    return __assign4.apply(this, arguments);
+  };
+  function GridColumn(_) {
+    return null;
+  }
+  function Grid(props) {
+    var _a;
+    var gridId = (0, import_react4.useState)(Rosie.guid("rosie-grid-"))[0], _b = (0, import_react4.useState)([]), records = _b[0], setRecords = _b[1], _c = (0, import_react4.useState)([]), columns = _c[0], setColumns = _c[1];
+    (0, import_react4.useEffect)(function() {
+      var body = document.querySelector("#".concat(gridId, " .rosie-grid-body"));
+      body.addEventListener("scroll", function() {
+        document.querySelector("#".concat(gridId, " .rosie-grid-header")).scrollLeft = body.scrollLeft;
+      });
+    }, []);
+    (0, import_react4.useEffect)(function() {
+      var columns2 = import_react4.Children.toArray(props.children).map(function(child) {
+        return child.props;
+      });
+      setColumns(columns2);
+    }, [props.children]);
+    return (0, import_jsx_runtime6.jsx)(import_jsx_runtime6.Fragment, { children: (0, import_jsx_runtime6.jsx)("div", { id: gridId, className: Rosie.classNames("rosie-grid rosie-grid-bordered rosie-grid-striped rosie-grid-hover d-flex flex-row", { fullscreen: props.fitScreen || props.fitHeight }, props.className), children: (0, import_jsx_runtime6.jsxs)("div", { className: "rosie-grid-viewport d-flex flex-column fullscreen", children: [(0, import_jsx_runtime6.jsx)("div", { className: Rosie.classNames("rosie-grid-header fw-bold bg-light overflow-hidden d-flex", { "flex-column": props.fitScreen || props.fitWidth }), children: (0, import_jsx_runtime6.jsxs)("div", { className: "rosie-grid-row d-flex flex-row", children: [columns.map(function(col, index) {
+      return (0, import_jsx_runtime6.jsx)(GridCell, __assign4({ header: true }, col), index);
+    }), (0, import_jsx_runtime6.jsx)("div", { style: { width: Rosie.SCROLLBAR_WIDTH } })] }) }), (0, import_jsx_runtime6.jsx)("div", { className: Rosie.classNames("rosie-grid-body fullscreen overflow-x-auto d-flex", { "flex-column": !props.fitHeight, "overflow-y-scroll": !props.fitWidth }), children: (0, import_jsx_runtime6.jsxs)("div", { children: [!(records === null || records === void 0 ? void 0 : records.length) && (0, import_jsx_runtime6.jsx)("div", { className: "border-top p-2", children: "No record found." }), (records === null || records === void 0 ? void 0 : records.length) > 0 && records.map(function(record, rowIndex) {
+      return (0, import_jsx_runtime6.jsx)(GridRow, { record, rowIndex, columns, checkboxSelection: props.checkboxSelection }, rowIndex);
+    })] }) }), !props.pagingToolbar && (0, import_jsx_runtime6.jsx)(import_jsx_runtime6.Fragment, { children: (0, import_jsx_runtime6.jsx)("div", { className: "rosie-grid-footer bg-light border-top d-flex flex-row p-2", children: (0, import_jsx_runtime6.jsxs)("div", { className: "ms-auto", children: ["Total records: ", (_a = records === null || records === void 0 ? void 0 : records.length) !== null && _a !== void 0 ? _a : 0] }) }) }), props.pagingToolbar && (0, import_jsx_runtime6.jsx)(import_jsx_runtime6.Fragment, { children: (0, import_jsx_runtime6.jsx)("div", { className: "rosie-grid-footer bg-light border-top d-flex flex-row p-2", children: props.pagingToolbar && (0, import_jsx_runtime6.jsx)(PagingToolbar, {}) }) })] }) }) });
+  }
 
   // node_modules/rosie-ui/dist/js/components/datepicker/date-picker.component.js
   var import_jsx_runtime7 = __toESM(require_jsx_runtime());
@@ -44864,8 +44964,8 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }(Subject2);
 
   // src/Shared/ClientApp/rosie/dist/js/core/index.js
-  var __assign2 = function() {
-    __assign2 = Object.assign || function(t) {
+  var __assign5 = function() {
+    __assign5 = Object.assign || function(t) {
       for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
         for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
@@ -44873,9 +44973,9 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       }
       return t;
     };
-    return __assign2.apply(this, arguments);
+    return __assign5.apply(this, arguments);
   };
-  var Rosie2 = __assign2({}, mixins_exports2);
+  var Rosie2 = __assign5({}, mixins_exports2);
 
   // src/Shared/ClientApp/rosie/dist/js/components/loading-indicator.component.js
   var import_jsx_runtime9 = __toESM(require_jsx_runtime2());
@@ -44891,13 +44991,13 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var import_jsx_runtime14 = __toESM(require_jsx_runtime2());
   var import_react10 = __toESM(require_react2());
 
-  // src/Shared/ClientApp/rosie/dist/js/components/grid/grid-cell.component.js
-  var import_jsx_runtime12 = __toESM(require_jsx_runtime2());
-  var import_react8 = __toESM(require_react2());
-
   // src/Shared/ClientApp/rosie/dist/js/components/grid/grid-row.component.js
   var import_jsx_runtime13 = __toESM(require_jsx_runtime2());
   var import_react9 = __toESM(require_react2());
+
+  // src/Shared/ClientApp/rosie/dist/js/components/grid/grid-cell.component.js
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime2());
+  var import_react8 = __toESM(require_react2());
 
   // src/Shared/ClientApp/rosie/dist/js/components/datepicker/date-picker.component.js
   var import_jsx_runtime15 = __toESM(require_jsx_runtime2());
@@ -45025,7 +45125,21 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           }
         ) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("main", { className: "fullscreen" })
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(Grid, { fitHeight: true, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Media Source", field: "mediaSource", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Campaign", field: "campaignName", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Adset", field: "adsetName", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Ad", field: "adName", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Revenue", field: "revenue", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Cost", field: "cost", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Impressions", field: "impressions", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Clicks", field: "clicks", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Installs", field: "installs", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "NRU", field: "installs", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "NPU", field: "installs", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "CPA", field: "installs", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "ROAS", field: "installs", style: { width: 200 } })
+      ] }) })
     ] });
   }
 

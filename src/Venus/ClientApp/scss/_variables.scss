@@ -8,14 +8,12 @@
 // Color system (6)
 
 // scss-docs-start gray-color-variables
-$white:    #fff;
 // $gray-100: #f3f4f7;
 // $gray-600:    #777;
 // $gray-900:    #333;
 // scss-docs-end gray-color-variables
 
 // scss-docs-start color-variables
-$blue:    #0d6efd;
 // $indigo:  #6610f2;
 // $purple:  #6f42c1;
 // $pink:    #d63384;
@@ -25,11 +23,9 @@ $blue:    #0d6efd;
 // $green:   #198754;
 // $teal:    #20c997;
 // $cyan:    #0dcaf0;
-$rosie:   #e97b98;
 // scss-docs-end color-variables
 
 // scss-docs-start theme-color-variables
-$primary:       $blue;
 // $secondary:     $gray-600;
 // $success:       $green;
 // $info:          $cyan;
@@ -57,33 +53,21 @@ $primary:       $blue;
 //
 // Define common padding and border radius sizes and more.
 
-// $border-color: rgba(0, 0, 0, 0.125);
 
-$component-active-color:      $white;
-$component-active-bg:         $primary;
-$component-hover-bg:          rgba($component-active-bg, .25);
 
 // Typography (600)
 //
 // Font, line-height, and color for body text, headings, and more.
+
 // $font-family-base: Effra, Roboto, Helvetica, Open-Sans, Arial, sans-serif;
-$font-size-base:              1rem; // Assumes the browser default, typically `16px`
-$font-size-sm:                $font-size-base * .875;
-$font-size-lg:                $font-size-base * 1.25;
 // $font-weight-base: 300;
 
 // Navs (1156)
 
-$nav-link-padding-y:                .5rem;
-$nav-link-padding-x:                1rem;
+
 
 // Navbar (1187)
 
-$navbar-brand-font-size:            $font-size-lg;
+
 
 // Breadcrumb (1631)
-
-// $breadcrumb-padding-y: .25rem;
-// $breadcrumb-padding-x: .5rem;
-// $breadcrumb-margin-bottom: 0;
-// $breadcrumb-height: 40px;

@@ -25843,7 +25843,7 @@
   var import_client = __toESM(require_client());
 
   // src/Solutions/ClientApp/views/app.view.tsx
-  var import_react14 = __toESM(require_react());
+  var import_react20 = __toESM(require_react());
 
   // node_modules/react-router/dist/development/chunk-C37GKA54.mjs
   var React = __toESM(require_react(), 1);
@@ -26580,6 +26580,11 @@
     return navigate;
   }
   var OutletContext = React2.createContext(null);
+  function useParams() {
+    let { matches } = React2.useContext(RouteContext);
+    let routeMatch = matches[matches.length - 1];
+    return routeMatch ? routeMatch.params : {};
+  }
   function useResolvedPath(to, { relative } = {}) {
     let { matches } = React2.useContext(RouteContext);
     let { pathname: locationPathname } = useLocation();
@@ -28269,8 +28274,22 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     var value = /* @__PURE__ */ new Date();
     return new Date(value.getFullYear(), value.getMonth(), value.getDate());
   };
+  Date.parseDate = function(str) {
+    var _a;
+    var value = (_a = new Date(str)) !== null && _a !== void 0 ? _a : /* @__PURE__ */ new Date();
+    return new Date(value.getFullYear(), value.getMonth(), value.getDate());
+  };
   Date.prototype.format = function(pattern) {
-    return pattern.replace("yyyy", "".concat(this.getFullYear())).replace("MM", "".concat(this.getMonth() + 1).padStart(2, "0")).replace("dd", "".concat(this.getDate()).padStart(2, "0")).replace("HH", "".concat(this.getHours()).padStart(2, "0")).replace("mm", "".concat(this.getMinutes()).padStart(2, "0")).replace("ss", "".concat(this.getSeconds()).padStart(2, "0"));
+    return (pattern !== null && pattern !== void 0 ? pattern : "yyyy-MM-dd").replace("yyyy", "".concat(this.getFullYear())).replace("MM", "".concat(this.getMonth() + 1).padStart(2, "0")).replace("dd", "".concat(this.getDate()).padStart(2, "0")).replace("HH", "".concat(this.getHours()).padStart(2, "0")).replace("mm", "".concat(this.getMinutes()).padStart(2, "0")).replace("ss", "".concat(this.getSeconds()).padStart(2, "0"));
+  };
+  Date.prototype.startOfMonth = function() {
+    return new Date(this.getFullYear(), this.getMonth(), 1);
+  };
+  Date.prototype.endOfMonth = function() {
+    return new Date(this.getFullYear(), this.getMonth() + 1, 0);
+  };
+  Date.prototype.lengthOfMonth = function() {
+    return this.endOfMonth().getDate();
   };
   Date.prototype.minus = function(amountToSubtract, unit) {
     if (unit === void 0) {
@@ -36514,13 +36533,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   // node_modules/rosie-ui/dist/js/components/paging-toolbar.component.js
   var import_jsx_runtime3 = __toESM(require_jsx_runtime());
   function PagingToolbar(props) {
-    var _a = props.page, page = _a === void 0 ? 1 : _a, _b = props.size, size = _b === void 0 ? 100 : _b, _c = props.total, total = _c === void 0 ? 0 : _c, _d = props.items, items = _d === void 0 ? 0 : _d, totalPage = (total / size).floor() + (total % size > 0 ? 1 : 0);
-    return (0, import_jsx_runtime3.jsxs)(import_jsx_runtime3.Fragment, { children: [(0, import_jsx_runtime3.jsxs)("div", { className: "mt-1 me-auto", children: ["Display records ", !items ? 0 : (page - 1) * size + 1, " - ", Math.min(page * size, (page - 1) * size + items), " of ", total] }), (0, import_jsx_runtime3.jsxs)("ul", { className: "pagination pagination-sm mb-0", children: [(0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page <= 1 }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-step-backward" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page - 1 < 1 }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-play fa-rotate-180" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: "page-item active", children: (0, import_jsx_runtime3.jsxs)("span", { className: "page-link", children: [!totalPage ? 0 : page, " / ", totalPage] }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page + 1 > totalPage }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-play" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page >= totalPage }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-step-forward" }) }) })] })] });
+    var _a = props.page, page = _a === void 0 ? 1 : _a, _b = props.size, size = _b === void 0 ? 100 : _b, _c = props.count, count = _c === void 0 ? 0 : _c, _d = props.total, total = _d === void 0 ? 0 : _d, totalPage = (total / size).floor() + (total % size > 0 ? 1 : 0);
+    return (0, import_jsx_runtime3.jsxs)(import_jsx_runtime3.Fragment, { children: [(0, import_jsx_runtime3.jsxs)("div", { className: "mt-1 me-auto", children: ["Display records ", !count ? 0 : (page - 1) * size + 1, " - ", Math.min(page * size, (page - 1) * size + count), " of ", total] }), (0, import_jsx_runtime3.jsxs)("ul", { className: "pagination pagination-sm mb-0", children: [(0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page <= 1 }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-step-backward" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page - 1 < 1 }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-play fa-rotate-180" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: "page-item active", children: (0, import_jsx_runtime3.jsxs)("span", { className: "page-link", children: [!totalPage ? 0 : page, " / ", totalPage] }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page + 1 > totalPage }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-play" }) }) }), (0, import_jsx_runtime3.jsx)("li", { className: Rosie.classNames("page-item", { disabled: page >= totalPage }), children: (0, import_jsx_runtime3.jsx)("span", { className: "page-link", children: (0, import_jsx_runtime3.jsx)("span", { className: "fa fa-step-forward" }) }) })] })] });
   }
 
   // node_modules/rosie-ui/dist/js/components/grid/grid.component.js
   var import_jsx_runtime6 = __toESM(require_jsx_runtime());
   var import_react4 = __toESM(require_react());
+
+  // node_modules/rosie-ui/dist/js/components/grid/grid-row.component.js
+  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
+  var import_react3 = __toESM(require_react());
 
   // node_modules/rosie-ui/dist/js/components/grid/grid-cell.component.js
   var import_jsx_runtime4 = __toESM(require_jsx_runtime());
@@ -36567,8 +36590,6 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // node_modules/rosie-ui/dist/js/components/grid/grid-row.component.js
-  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
-  var import_react3 = __toESM(require_react());
   var __assign3 = function() {
     __assign3 = Object.assign || function(t) {
       for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -36622,6 +36643,38 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     }), (0, import_jsx_runtime6.jsx)("div", { style: { width: Rosie.SCROLLBAR_WIDTH } })] }) }), (0, import_jsx_runtime6.jsx)("div", { className: Rosie.classNames("rosie-grid-body fullscreen overflow-x-auto d-flex", { "flex-column": !props.fitHeight, "overflow-y-scroll": !props.fitWidth }), children: (0, import_jsx_runtime6.jsxs)("div", { children: [!(records === null || records === void 0 ? void 0 : records.length) && (0, import_jsx_runtime6.jsx)("div", { className: "border-top p-2", children: "No record found." }), (records === null || records === void 0 ? void 0 : records.length) > 0 && records.map(function(record, rowIndex) {
       return (0, import_jsx_runtime6.jsx)(GridRow, { record, rowIndex, columns, checkboxSelection: props.checkboxSelection }, rowIndex);
     })] }) }), !props.pagingToolbar && (0, import_jsx_runtime6.jsx)(import_jsx_runtime6.Fragment, { children: (0, import_jsx_runtime6.jsx)("div", { className: "rosie-grid-footer bg-light border-top d-flex flex-row p-2", children: (0, import_jsx_runtime6.jsxs)("div", { className: "ms-auto", children: ["Total records: ", (_a = records === null || records === void 0 ? void 0 : records.length) !== null && _a !== void 0 ? _a : 0] }) }) }), props.pagingToolbar && (0, import_jsx_runtime6.jsx)(import_jsx_runtime6.Fragment, { children: (0, import_jsx_runtime6.jsx)("div", { className: "rosie-grid-footer bg-light border-top d-flex flex-row p-2", children: props.pagingToolbar && (0, import_jsx_runtime6.jsx)(PagingToolbar, {}) }) })] }) }) });
+  }
+
+  // node_modules/rosie-ui/dist/js/components/datepicker/date-picker.component.js
+  var import_jsx_runtime7 = __toESM(require_jsx_runtime());
+  var import_react5 = __toESM(require_react());
+  function DatePicker(props) {
+    var _a = (0, import_react5.useState)(props.value), value = _a[0], setValue = _a[1];
+    return (0, import_jsx_runtime7.jsxs)("div", { className: Rosie.classNames("input-group", props.className), children: [(0, import_jsx_runtime7.jsx)("div", { className: "input-group-text", children: (0, import_jsx_runtime7.jsx)("span", { className: "fa fa-calendar" }) }), (0, import_jsx_runtime7.jsx)(DatePickerInput, { value: props.value, onChange: setValue }), (0, import_jsx_runtime7.jsx)("button", { className: "btn btn-outline-secondary", onClick: function() {
+      return props.onChange(value);
+    }, children: "Apply" })] });
+  }
+  function DatePickerInput(props) {
+    var _a = (0, import_react5.useState)(""), dateStr = _a[0], setDateStr = _a[1];
+    (0, import_react5.useEffect)(function() {
+      var _a2;
+      setDateStr(((_a2 = props.value) !== null && _a2 !== void 0 ? _a2 : Date.currentDate()).format());
+    }, [props.value]);
+    return (0, import_jsx_runtime7.jsx)(import_jsx_runtime7.Fragment, { children: (0, import_jsx_runtime7.jsx)("input", { type: "text", className: "form-control text-center", value: dateStr, onChange: function(e) {
+      return setDateStr(e.target.value);
+    }, onBlur: function() {
+      return props.onChange(Date.parseDate(dateStr));
+    } }) });
+  }
+
+  // node_modules/rosie-ui/dist/js/components/datepicker/date-range-picker.component.js
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime());
+  var import_react6 = __toESM(require_react());
+  function DateRangePicker(props) {
+    var _a = (0, import_react6.useState)(props.start), startDate = _a[0], setStartDate = _a[1], _b = (0, import_react6.useState)(props.end), endDate = _b[0], setEndDate = _b[1];
+    return (0, import_jsx_runtime8.jsxs)("div", { className: Rosie.classNames("input-group", props.className), children: [(0, import_jsx_runtime8.jsx)("div", { className: "input-group-text", children: (0, import_jsx_runtime8.jsx)("span", { className: "fa fa-calendar" }) }), (0, import_jsx_runtime8.jsx)(DatePickerInput, { value: startDate, onChange: setStartDate }), (0, import_jsx_runtime8.jsx)(DatePickerInput, { value: endDate, onChange: setEndDate }), (0, import_jsx_runtime8.jsx)("button", { className: "btn btn-outline-secondary", onClick: function() {
+      return props.onChange(startDate, endDate);
+    }, children: "Apply" })] });
   }
 
   // src/Venus/ClientApp/ts/core/shared.ts
@@ -36684,8 +36737,22 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     var value = /* @__PURE__ */ new Date();
     return new Date(value.getFullYear(), value.getMonth(), value.getDate());
   };
+  Date.parseDate = function(str) {
+    var _a;
+    var value = (_a = new Date(str)) !== null && _a !== void 0 ? _a : /* @__PURE__ */ new Date();
+    return new Date(value.getFullYear(), value.getMonth(), value.getDate());
+  };
   Date.prototype.format = function(pattern) {
-    return pattern.replace("yyyy", "".concat(this.getFullYear())).replace("MM", "".concat(this.getMonth() + 1).padStart(2, "0")).replace("dd", "".concat(this.getDate()).padStart(2, "0")).replace("HH", "".concat(this.getHours()).padStart(2, "0")).replace("mm", "".concat(this.getMinutes()).padStart(2, "0")).replace("ss", "".concat(this.getSeconds()).padStart(2, "0"));
+    return (pattern !== null && pattern !== void 0 ? pattern : "yyyy-MM-dd").replace("yyyy", "".concat(this.getFullYear())).replace("MM", "".concat(this.getMonth() + 1).padStart(2, "0")).replace("dd", "".concat(this.getDate()).padStart(2, "0")).replace("HH", "".concat(this.getHours()).padStart(2, "0")).replace("mm", "".concat(this.getMinutes()).padStart(2, "0")).replace("ss", "".concat(this.getSeconds()).padStart(2, "0"));
+  };
+  Date.prototype.startOfMonth = function() {
+    return new Date(this.getFullYear(), this.getMonth(), 1);
+  };
+  Date.prototype.endOfMonth = function() {
+    return new Date(this.getFullYear(), this.getMonth() + 1, 0);
+  };
+  Date.prototype.lengthOfMonth = function() {
+    return this.endOfMonth().getDate();
   };
   Date.prototype.minus = function(amountToSubtract, unit) {
     if (unit === void 0) {
@@ -44917,26 +44984,34 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var Rosie2 = __assign5({}, mixins_exports2);
 
   // src/Shared/ClientApp/rosie/dist/js/components/loading-indicator.component.js
-  var import_jsx_runtime7 = __toESM(require_jsx_runtime2());
-
-  // src/Shared/ClientApp/rosie/dist/js/components/dialog.component.js
-  var import_jsx_runtime8 = __toESM(require_jsx_runtime2());
-  var import_react5 = __toESM(require_react2());
-
-  // src/Shared/ClientApp/rosie/dist/js/components/paging-toolbar.component.js
   var import_jsx_runtime9 = __toESM(require_jsx_runtime2());
 
+  // src/Shared/ClientApp/rosie/dist/js/components/dialog.component.js
+  var import_jsx_runtime10 = __toESM(require_jsx_runtime2());
+  var import_react7 = __toESM(require_react2());
+
+  // src/Shared/ClientApp/rosie/dist/js/components/paging-toolbar.component.js
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime2());
+
   // src/Shared/ClientApp/rosie/dist/js/components/grid/grid.component.js
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime2());
+  var import_react10 = __toESM(require_react2());
+
+  // src/Shared/ClientApp/rosie/dist/js/components/grid/grid-row.component.js
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime2());
+  var import_react9 = __toESM(require_react2());
+
+  // src/Shared/ClientApp/rosie/dist/js/components/grid/grid-cell.component.js
   var import_jsx_runtime12 = __toESM(require_jsx_runtime2());
   var import_react8 = __toESM(require_react2());
 
-  // src/Shared/ClientApp/rosie/dist/js/components/grid/grid-cell.component.js
-  var import_jsx_runtime10 = __toESM(require_jsx_runtime2());
-  var import_react6 = __toESM(require_react2());
+  // src/Shared/ClientApp/rosie/dist/js/components/datepicker/date-picker.component.js
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime2());
+  var import_react11 = __toESM(require_react2());
 
-  // src/Shared/ClientApp/rosie/dist/js/components/grid/grid-row.component.js
-  var import_jsx_runtime11 = __toESM(require_jsx_runtime2());
-  var import_react7 = __toESM(require_react2());
+  // src/Shared/ClientApp/rosie/dist/js/components/datepicker/date-range-picker.component.js
+  var import_jsx_runtime16 = __toESM(require_jsx_runtime2());
+  var import_react12 = __toESM(require_react2());
 
   // src/Venus/ClientApp/ts/core/http.ts
   var loginUrl = `/login`;
@@ -44968,61 +45043,85 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   var AuthUserModel = Model({ proxy: { url: "/api/auth/user" } });
 
   // src/Venus/ClientApp/ts/components/require-auth.component.tsx
-  var import_jsx_runtime13 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
   function RequireAuth({ component: Component4, title = "" }) {
     if (!LocalCache2.get(AUTH_TOKEN)) redirectToLogin();
     document.title = title ? `${title} | Venus` : "Venus";
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Component4, {});
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Component4, {});
   }
 
   // src/Venus/ClientApp/ts/components/app-navigator.component.tsx
-  var import_react9 = __toESM(require_react());
-  var import_jsx_runtime14 = __toESM(require_jsx_runtime());
+  var import_react13 = __toESM(require_react());
+  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
   function AppNavigator(props) {
-    const location2 = useLocation(), [navigation, setNavigation] = (0, import_react9.useState)([]);
-    (0, import_react9.useEffect)(() => {
+    const location2 = useLocation(), [navigation, setNavigation] = (0, import_react13.useState)([]);
+    (0, import_react13.useEffect)(() => {
       setNavigation(props.navigator);
     }, []);
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("nav", { className: "d-flex flex-column", children: navigation.map((navItem) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("nav", { className: "d-flex flex-column", children: navigation.map((navItem) => {
       if (navItem.children && navItem.children.length > 0) {
-        return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_react9.Fragment, { children: [
-          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "nav-link disabled text-body-tertiary text-uppercase fw-bold p-1", children: navItem.navName }),
+        return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_react13.Fragment, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "nav-link disabled text-body-tertiary text-uppercase fw-bold p-1", children: navItem.navName }),
           navItem.children.map((childNavItem) => {
-            return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(NavigationLink, { isChild: true, navItem: childNavItem, active: location2?.pathname.startsWith(childNavItem.navPath) }, childNavItem.navId);
+            return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(NavigationLink, { isChild: true, navItem: childNavItem, currentPath: location2?.pathname ?? "" }, childNavItem.navId);
           })
         ] }, navItem.navId);
       }
       if (!navItem.navPath) return null;
-      return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(NavigationLink, { navItem, active: location2?.pathname.startsWith(navItem.navPath) }, navItem.navId);
+      return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(NavigationLink, { navItem, currentPath: location2?.pathname ?? "" }, navItem.navId);
     }) });
   }
   function NavigationLink(props) {
-    const { navItem, active, isChild } = props;
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(Link, { to: navItem.navPath, className: Rosie.classNames("nav-link p-1", { active, "ps-3": isChild }), children: [
-      navItem.navIcon ? /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: `fa fa-${navItem.navIcon} nav-icon` }) : "",
+    const { navItem, isChild, currentPath } = props, activeFn = navItem.activeFn ?? ((path) => path.startsWith(navItem.navPath));
+    return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(Link, { to: navItem.navPath, className: Rosie.classNames("nav-link p-1", { active: activeFn(currentPath), "ps-3": isChild }), children: [
+      navItem.navIcon ? /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: `fa fa-${navItem.navIcon} nav-icon` }) : "",
       " ",
       navItem.navName
     ] });
   }
 
   // src/Venus/ClientApp/ts/components/account.component.tsx
-  var import_react10 = __toESM(require_react());
-  var import_jsx_runtime15 = __toESM(require_jsx_runtime());
+  var import_react14 = __toESM(require_react());
+  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
 
   // src/Venus/ClientApp/ts/components/app-layout.component.tsx
-  var import_jsx_runtime16 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
   function AppLayout(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "app fullscreen d-flex flex-row", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("aside", { className: "app-sidebar d-flex flex-column border-end", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "sidebar-body flex-1 overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AppNavigator, { navigator: props.navigator }) }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "app-wrapper fullscreen d-flex position-relative", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(LoadingIndicator, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "app-body fullscreen d-flex flex-column", children: props.routes })
+    return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "app fullscreen d-flex flex-row", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("aside", { className: "app-sidebar d-flex flex-column border-end", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "sidebar-body flex-1 overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(AppNavigator, { navigator: props.navigator }) }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "app-wrapper fullscreen d-flex position-relative", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(LoadingIndicator, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: "app-body fullscreen d-flex flex-column", children: props.routes })
       ] })
     ] });
   }
 
   // src/Solutions/ClientApp/core/index.ts
   var navigator2 = [{
+    navId: "ua",
+    navName: "User Acquisition",
+    children: [{
+      navId: "segment-tools",
+      navName: "Segment Tools",
+      navPath: "/ua/segment-tools"
+    }, {
+      navId: "custom-audiences",
+      navName: "Custom Audiences",
+      navPath: "/ua/custom-audiences"
+    }]
+  }, {
+    navId: "ai",
+    navName: "AI Features",
+    children: [{
+      navId: "fraud",
+      navName: "Fraud Detection",
+      navPath: "/ai/fraud"
+    }, {
+      navId: "churn",
+      navName: "Churn Detection",
+      navPath: "/ai/churn"
+    }]
+  }, {
     navId: "kyc",
     navName: "KYC",
     children: [{
@@ -45050,12 +45149,208 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     });
   }
 
+  // src/Solutions/ClientApp/views/ua/segmentation-tools.view.tsx
+  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
+  function SegmentationToolsView() {
+    return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(import_jsx_runtime21.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("ol", { className: "breadcrumb", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("li", { className: "breadcrumb-item", children: "User Acquisition" }),
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("li", { className: "breadcrumb-item active", children: "Segmentation Tools" })
+    ] }) });
+  }
+
+  // src/Solutions/ClientApp/views/ua/custom-audiences.view.tsx
+  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  function CustomAudiencesView() {
+    return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_jsx_runtime22.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("ol", { className: "breadcrumb", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item", children: "User Acquisition" }),
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item active", children: "Custom Audiences" })
+    ] }) });
+  }
+
+  // src/Solutions/ClientApp/views/ai-features/fraud.view.tsx
+  var import_react15 = __toESM(require_react());
+  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
+  function FraudDetectionView() {
+    const [reportDate, setReportDate] = (0, import_react15.useState)(Date.currentDate().minus(1));
+    return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(import_jsx_runtime23.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("li", { className: "breadcrumb-item", children: "AI Features" }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("li", { className: "breadcrumb-item active", children: "Fraud Detection" }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "d-flex flex-row ms-auto", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(NavLink, { to: `/ai/fraud/${reportDate.format()}/psi`, className: "btn btn-sm btn-outline-secondary me-2", style: { width: 100 }, children: "View PSI" }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DatePicker, { className: "input-group-sm", value: reportDate, onChange: setReportDate })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("main", { className: "fullscreen d-flex flex-row", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "w-25" }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "fullscreen w-75", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(Grid, { fitHeight: true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Report Date", field: "reportDate", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "User ID", field: "userId", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Platform", field: "platform", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Fraud Level", field: "fraudLevel", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Probability", field: "fraudProba", style: { width: 150 } })
+        ] }) })
+      ] })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/ai-features/churn.view.tsx
+  var import_react16 = __toESM(require_react());
+  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  function ChurnDetectionView() {
+    const [reportDate, setReportDate] = (0, import_react16.useState)(Date.currentDate().minus(1));
+    return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(import_jsx_runtime24.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("li", { className: "breadcrumb-item", children: "AI Features" }),
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("li", { className: "breadcrumb-item active", children: "Churn Detection" }),
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "d-flex flex-row ms-auto", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(NavLink, { to: `/ua/custom-audiences`, className: "btn btn-sm btn-outline-secondary me-2", style: { width: 300 }, children: "Create Custom Audiences" }),
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(DatePicker, { className: "input-group-sm", value: reportDate, onChange: setReportDate })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("main", { className: "fullscreen d-flex flex-row", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "w-25" }),
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "fullscreen w-75", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(Grid, { fitHeight: true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(GridColumn, { headerName: "Report Date", field: "reportDate", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(GridColumn, { headerName: "User ID", field: "userId", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(GridColumn, { headerName: "Platform", field: "platform", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(GridColumn, { headerName: "Churn Level", field: "fraudLevel", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(GridColumn, { headerName: "Probability", field: "fraudProba", style: { width: 150 } })
+        ] }) })
+      ] })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/ai-features/psi.view.tsx
+  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
+  function PsiView() {
+    const { feature, reportDate } = useParams();
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(import_jsx_runtime25.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("li", { className: "breadcrumb-item", children: "AI Features" }),
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("li", { className: "breadcrumb-item", children: feature }),
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("li", { className: "breadcrumb-item", children: reportDate }),
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("li", { className: "breadcrumb-item active", children: "PSI" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("main", { className: "fullscreen" })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/kyc/audit-logs.view.tsx
+  var import_react17 = __toESM(require_react());
+  var import_jsx_runtime26 = __toESM(require_jsx_runtime());
+  function AuditLogsView() {
+    const [endDate, setEndDate] = (0, import_react17.useState)(Date.currentDate().minus(1)), [startDate, setStartDate] = (0, import_react17.useState)(endDate.minus(7)), [page, setPage] = (0, import_react17.useState)(1), [size, setSize] = (0, import_react17.useState)(10), [total, setTotal] = (0, import_react17.useState)(1), [auditLogs, setAuditLogs] = (0, import_react17.useState)([]);
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(import_jsx_runtime26.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("li", { className: "breadcrumb-item active", children: "Audit Logs" }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
+          DateRangePicker,
+          {
+            className: "input-group-sm",
+            start: startDate,
+            end: endDate,
+            onChange: (start3, end3) => {
+              setStartDate(start3);
+              setEndDate(end3);
+            }
+          }
+        ) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(Grid, { fitHeight: true, pagingToolbar: true, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Request ID", field: "requestId", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Request Date", field: "requestDate", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Front", field: "front", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Back", field: "back", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Selfie", field: "selfie", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "OCR", field: "ocr", style: { width: 200 }, renderer: (value) => {
+          return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(import_jsx_runtime26.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "SSN: ",
+              value?.ssn
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Name: ",
+              value?.name
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "DOB: ",
+              value?.dob
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Gender: ",
+              value?.gender
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Address: ",
+              value?.address
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Given Date: ",
+              value?.givenDate
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Given Place: ",
+              value?.givenPlace
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Due Date: ",
+              value?.dueDate
+            ] })
+          ] });
+        } }),
+        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Face Matching", field: "faceMatching", style: { width: 200 }, renderer: (value) => {
+          return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(import_jsx_runtime26.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Matched: ",
+              value?.matched ? "TRUE" : "FALSE"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("div", { children: [
+              "Confidence Score: ",
+              value?.confidence
+            ] })
+          ] });
+        } })
+      ] }) })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/kyc/auto-approval.view.tsx
+  var import_react18 = __toESM(require_react());
+  var import_jsx_runtime27 = __toESM(require_jsx_runtime());
+  function AutoApprovalView() {
+    const [step, setStep] = (0, import_react18.useState)(1), [requestId] = (0, import_react18.useState)(generateRequestId());
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(import_jsx_runtime27.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { className: "breadcrumb-item active", children: "Auto Approval" }),
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("button", { type: "button", className: "btn btn-sm btn-outline-secondary", onClick: () => location.reload(), children: "Refresh" }) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("main", { className: "fullscreen overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "container-fluid", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "col-12 col-md-3", children: [
+        step === 1 && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(TakeIdImage, { requestId }),
+        step === 2 && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(TakeIdImage, { requestId }),
+        step === 3 && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(TakeSelfieImage, { requestId }),
+        step === 4 && /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Verification, { requestId })
+      ] }) }) }) })
+    ] });
+  }
+  function TakeIdImage(props) {
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(import_jsx_runtime27.Fragment, {});
+  }
+  function TakeSelfieImage(props) {
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(import_jsx_runtime27.Fragment, {});
+  }
+  function Verification(props) {
+    return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(import_jsx_runtime27.Fragment, {});
+  }
+
   // src/Solutions/ClientApp/views/chat.view.tsx
-  var import_react11 = __toESM(require_react());
-  var import_jsx_runtime17 = __toESM(require_jsx_runtime());
+  var import_react19 = __toESM(require_react());
+  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
   function ChatView() {
-    const [sessionId] = (0, import_react11.useState)(Rosie.guid()), [question, setQuestion] = (0, import_react11.useState)(""), [conversation, setConversation] = (0, import_react11.useState)([]);
-    (0, import_react11.useEffect)(() => {
+    const [sessionId] = (0, import_react19.useState)(Rosie.guid()), [question, setQuestion] = (0, import_react19.useState)(""), [conversation, setConversation] = (0, import_react19.useState)([]);
+    (0, import_react19.useEffect)(() => {
       const chatHistory = document.getElementById("chat-history");
       chatHistory.scrollTop = chatHistory.scrollHeight;
     }, [conversation]);
@@ -45077,15 +45372,15 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         document.getElementById("send-question").click();
       }
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(import_jsx_runtime17.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("ol", { className: "breadcrumb", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("li", { className: "breadcrumb-item active", children: "Chat" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("main", { className: "fullscreen d-flex flex-column", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { id: "chat-history", className: "fullscreen d-flex flex-column chat-body overflow-y-auto p-2", children: conversation.map((message, index) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(import_jsx_runtime28.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("ol", { className: "breadcrumb", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { className: "breadcrumb-item active", children: "Chat" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("main", { className: "fullscreen d-flex flex-column", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { id: "chat-history", className: "fullscreen d-flex flex-column chat-body overflow-y-auto p-2", children: conversation.map((message, index) => {
           if (!message.content) return null;
-          return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_react11.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: `d-flex ${message.type} mb-2`, children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "card", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "card-body p-2", children: message.content }) }) }) }, index);
+          return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_react19.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: `d-flex ${message.type} mb-2`, children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-body p-2", children: message.content }) }) }) }, index);
         }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "chat-footer p-2", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "d-flex", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "chat-footer p-2", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "d-flex", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
             "textarea",
             {
               className: "form-control",
@@ -45096,7 +45391,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
               onKeyUp: handleChatInputKeyUp
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(
             "button",
             {
               id: "send-question",
@@ -45111,128 +45406,37 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ] });
   }
 
-  // src/Solutions/ClientApp/views/kyc/audit-logs.view.tsx
-  var import_react12 = __toESM(require_react());
-  var import_jsx_runtime18 = __toESM(require_jsx_runtime());
-  function AuditLogsView() {
-    const [endDate, setEndDate] = (0, import_react12.useState)(Date.currentDate().minus(1)), [startDate, setStartDate] = (0, import_react12.useState)(endDate.minus(7)), [page, setPage] = (0, import_react12.useState)(1), [size, setSize] = (0, import_react12.useState)(10), [total, setTotal] = (0, import_react12.useState)(1), [auditLogs, setAuditLogs] = (0, import_react12.useState)([]);
-    return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_jsx_runtime18.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("ol", { className: "breadcrumb", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("li", { className: "breadcrumb-item active", children: "Audit Logs" }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "input-group input-group-sm", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "input-group-text", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { className: "fa fa-calendar" }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("input", { type: "text", className: "form-control text-center", value: startDate.format("yyyy-MM-dd") }),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("input", { type: "text", className: "form-control text-center", value: endDate.format("yyyy-MM-dd") }),
-          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("button", { className: "btn btn-outline-secondary", children: "Search" })
-        ] }) })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(Grid, { fitHeight: true, pagingToolbar: true, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GridColumn, { headerName: "Request ID", field: "requestId", style: { width: 150 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GridColumn, { headerName: "Request Date", field: "requestDate", style: { width: 150 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GridColumn, { headerName: "Front", field: "front", style: { width: 200 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GridColumn, { headerName: "Back", field: "back", style: { width: 200 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GridColumn, { headerName: "Selfie", field: "selfie", style: { width: 200 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GridColumn, { headerName: "OCR", field: "ocr", style: { width: 200 }, renderer: (value) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_jsx_runtime18.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "SSN: ",
-              value?.ssn
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Name: ",
-              value?.name
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "DOB: ",
-              value?.dob
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Gender: ",
-              value?.gender
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Address: ",
-              value?.address
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Given Date: ",
-              value?.givenDate
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Given Place: ",
-              value?.givenPlace
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Due Date: ",
-              value?.dueDate
-            ] })
-          ] });
-        } }),
-        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(GridColumn, { headerName: "Face Matching", field: "faceMatching", style: { width: 200 }, renderer: (value) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_jsx_runtime18.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Matched: ",
-              value?.matched ? "TRUE" : "FALSE"
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-              "Confidence Score: ",
-              value?.confidence
-            ] })
-          ] });
-        } })
-      ] }) })
-    ] });
-  }
-
-  // src/Solutions/ClientApp/views/kyc/auto-approval.view.tsx
-  var import_react13 = __toESM(require_react());
-  var import_jsx_runtime19 = __toESM(require_jsx_runtime());
-  function AutoApprovalView() {
-    const [step, setStep] = (0, import_react13.useState)(1), [requestId] = (0, import_react13.useState)(generateRequestId());
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(import_jsx_runtime19.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("ol", { className: "breadcrumb", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item active", children: "Auto Approval" }),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("button", { type: "button", className: "btn btn-sm btn-outline-secondary", onClick: () => location.reload(), children: "Refresh" }) })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("main", { className: "fullscreen overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "container-fluid", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "col-12 col-md-3", children: [
-        step === 1 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(TakeIdImage, { requestId }),
-        step === 2 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(TakeIdImage, { requestId }),
-        step === 3 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(TakeSelfieImage, { requestId }),
-        step === 4 && /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(Verification, { requestId })
-      ] }) }) }) })
-    ] });
-  }
-  function TakeIdImage(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_jsx_runtime19.Fragment, {});
-  }
-  function TakeSelfieImage(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_jsx_runtime19.Fragment, {});
-  }
-  function Verification(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_jsx_runtime19.Fragment, {});
+  // src/Solutions/ClientApp/views/data-contract.view.tsx
+  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
+  function DataContractView() {
+    return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(import_jsx_runtime29.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("ol", { className: "breadcrumb", children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("li", { className: "breadcrumb-item active", children: "Data Contract" }) }) });
   }
 
   // src/Solutions/ClientApp/views/app.view.tsx
-  var import_jsx_runtime20 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
   function AppView() {
-    (0, import_react14.useEffect)(() => {
+    (0, import_react20.useEffect)(() => {
       if (LocalCache.get(AUTH_TOKEN)) {
         AuthUserModel.load();
       }
     }, []);
-    return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(HashRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(AppLayout, { navigator: navigator2, routes: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(Routes, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "/chat", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(RequireAuth, { component: ChatView, title: "Chat" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "/kyc/audit-logs", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(RequireAuth, { component: AuditLogsView, title: "KYC Audit Logs" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "/kyc/auto-approval", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(RequireAuth, { component: AutoApprovalView, title: "KYC Auto Approval" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(Navigate, { to: "/chat" }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(HashRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(AppLayout, { navigator: navigator2, routes: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(Routes, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/chat", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: ChatView, title: "Chat" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/data-contract", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: DataContractView, title: "Data Contract" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/ai/fraud", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: FraudDetectionView, title: "Fraud Detection" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/ai/churn", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: ChurnDetectionView, title: "Churn Detection" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/ai/:feature/:reportDate/psi", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: PsiView, title: "PSI Model Monitoring" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/ua/segment-tools", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: SegmentationToolsView, title: "Segmentation Tools" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/ua/custom-audiences", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: CustomAudiencesView, title: "Custom Audiences" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/kyc/audit-logs", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: AuditLogsView, title: "KYC Audit Logs" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "/kyc/auto-approval", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(RequireAuth, { component: AutoApprovalView, title: "KYC Auto Approval" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Navigate, { to: "/chat" }) })
     ] }) }) });
   }
 
   // src/Solutions/ClientApp/app.tsx
-  var import_jsx_runtime21 = __toESM(require_jsx_runtime());
-  (0, import_client.createRoot)(document.getElementById("react-root")).render(/* @__PURE__ */ (0, import_jsx_runtime21.jsx)(AppView, {}));
+  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
+  (0, import_client.createRoot)(document.getElementById("react-root")).render(/* @__PURE__ */ (0, import_jsx_runtime31.jsx)(AppView, {}));
 })();
 /*! Bundled license information:
 
