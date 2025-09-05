@@ -1,3 +1,4 @@
+import { CriteriaField } from 'rosie-ui';
 import { NavItem } from 'venus/core';
 
 export type Message = {
@@ -36,13 +37,9 @@ export const navigator: NavItem[] = [{
   navId: 'ua',
   navName: 'User Acquisition',
   children: [{
-    navId: 'segment-tools',
-    navName: 'Segment Tools',
-    navPath: '/ua/segment-tools'
-  }, {
-    navId: 'custom-audiences',
-    navName: 'Custom Audiences',
-    navPath: '/ua/custom-audiences'
+    navId: 'audiences',
+    navName: 'Audiences',
+    navPath: '/ua/audiences'
   }]
 }, {
   navId: 'ai',
@@ -77,6 +74,8 @@ export const navigator: NavItem[] = [{
     navPath: '/chat',
   }]
 }]
+
+export const  ruleCriteria: CriteriaField[] = [];
 
 export function generateRequestId() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c => {

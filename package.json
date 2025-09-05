@@ -9,13 +9,10 @@
   },
   "bugs": "https://github.com/huytrongnguyen/venus/issues",
   "scripts": {
-    "build": "npm run rosie-build && npm run venus-build",
-    "watch": "esbuild src/Reports/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/solutreportsions.js --loader:.tsx=tsx --format=iife --watch",
-    "rosie-build": "npm run rosie-copy && npm run rosie-css-copy",
-    "rosie-copy": "cp -r src/Shared/ClientApp/rosie/dist node_modules/rosie-ui/",
-    "rosie-fonts-copy": "cp -r node_modules/rosie-ui/dist/webfonts src/Venus/wwwroot",
-    "rosie-css-copy": "cp node_modules/rosie-ui/dist/css/rosie.css src/Venus/wwwroot/",
-    "reports-watch": "esbuild src/Reports/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/solutreportsions.js --loader:.tsx=tsx --format=iife --watch",
+    "build": "npm run venus-fonts-copy && npm run venus-css-build",
+    "watch": "npm run solutions-watch",
+    "master-data-build": "esbuild src/MasterData/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/master-data.js --loader:.tsx=tsx --format=iife --minify",
+    "reports-watch": "esbuild src/Reports/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/reports.js --loader:.tsx=tsx --format=iife --watch",
     "reports-build": "esbuild src/Reports/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/reports.js --loader:.tsx=tsx --format=iife --minify",
     "load-build": "esbuild src/Load/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/load.js --loader:.tsx=tsx --format=iife --minify",
     "solutions-watch": "esbuild src/Solutions/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/solutions.js --loader:.tsx=tsx --format=iife --watch",
@@ -24,10 +21,13 @@
     "admin-css-build": "sass src/Administration/ClientApp/app.scss src/Venus/wwwroot/admin.css --style=compressed --no-source-map",
     "admin-js-build": "esbuild src/Administration/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/admin.js --loader:.tsx=tsx --format=iife --minify",
     "auth-build": "esbuild src/Auth/ClientApp/app.tsx --bundle --outfile=src/Venus/wwwroot/auth.js --loader:.tsx=tsx --format=iife --minify",
-    "venus-build": "sass src/Venus/ClientApp/scss/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map"
+    "rosie-js-build": "cd src/Shared/ClientApp/rosie && npm run js && cd ../../../../ && cp -r src/Shared/ClientApp/rosie/dist/js node_modules/rosie-ui/dist/",
+    "rosie-css-build": "cd src/Shared/ClientApp/rosie && npm run css && cd ../../../../ && npm run venus-css-build",
+    "venus-css-build": "sass src/Venus/ClientApp/scss/app.scss src/Venus/wwwroot/venus.css --style=compressed --no-source-map",
+    "venus-bootstrap-copy": "cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js src/Venus/wwwroot/ && cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map src/Venus/wwwroot/",
+    "venus-fonts-copy": "cp -r node_modules/rosie-ui/dist/webfonts src/Venus/wwwroot/"
   },
   "dependencies": {
-    "jquery": "3.7.1",
     "rosie-ui": "0.2.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",

@@ -10,7 +10,7 @@ export function ChurnDetectionView() {
       <li className="breadcrumb-item">AI Features</li>
       <li className="breadcrumb-item active">Churn Detection</li>
       <div className="d-flex flex-row ms-auto">
-        <NavLink to={`/ua/custom-audiences`} className="btn btn-sm btn-outline-secondary me-2" style={{width:300}}>Create Custom Audiences</NavLink>
+        <NavLink to={`/ua/audiences/import`} className="btn btn-sm btn-outline-secondary me-2" style={{width:300}}>Import Audience</NavLink>
         <DatePicker className="input-group-sm" value={reportDate} onChange={setReportDate} />
       </div>
     </ol>

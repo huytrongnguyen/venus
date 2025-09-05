@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Venus</title>
   <link rel="icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/rosie.css?_dc=@(DateTime.Now.Ticks)" />
   <link rel="stylesheet" href="/venus.css?_dc=@(DateTime.Now.Ticks)" />
   @RenderSection("Styles", required: false)
 </head>
@@ -19,6 +18,7 @@
       @RenderBody()
     </div>
   </div>
+  <script src="/bootstrap.bundle.min.js?dc=@(DateTime.Now.Ticks)"></script>
   @RenderSection("Scripts", required: false)
 </body>
 </html>
