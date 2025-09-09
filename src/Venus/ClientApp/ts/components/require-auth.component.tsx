@@ -1,4 +1,4 @@
-import { LocalCache } from 'rosie';
+import { LocalCache } from 'rosie-ui';
 import { AUTH_TOKEN, redirectToLogin } from 'venus/core';
 
 export function RequireAuth({ component: Component, title = '' }) {

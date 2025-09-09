@@ -7,14 +7,12 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
+      "masterdata/core": ["src/MasterData/ClientApp/core"],
       "reports/core": ["src/Reports/ClientApp/core"],
       "solutions/core": ["src/Solutions/ClientApp/core"],
       "admin/core": ["src/Administration/ClientApp/core"],
       "venus/components": ["src/Venus/ClientApp/ts/components"],
-      "venus/core": ["src/Venus/ClientApp/ts/core"],
-      "rosie/components": ["src/Shared/ClientApp/rosie/ts/components"],
-      "rosie/core": ["src/Shared/ClientApp/rosie/ts/core"],
-      "rosie": ["src/Shared/ClientApp/rosie"]
+      "venus/core": ["src/Venus/ClientApp/ts/core"]
     },
     "removeComments": true,
     "declaration": true,

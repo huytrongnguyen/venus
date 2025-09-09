@@ -11,6 +11,9 @@ import { ChurnDetectionView, FraudDetectionView, PsiView } from './ai-features';
 import { AuditLogsView, AutoApprovalView } from './kyc';
 import { ChatView } from './chat.view';
 import { DataContractView } from './data-contract.view';
+import { AudienceAnalysisView } from './ua/audience-analysis.view';
+import { FinancialProjectionView } from './fa';
+import { TalentProfileView } from './hr';
 
 export function AppView() {
   useEffect(() => {
@@ -23,10 +26,13 @@ export function AppView() {
     <AppLayout navigator={navigator} routes={<Routes>
       <Route path="/chat" element={<RequireAuth component={ChatView} title="Chat" />} />
       <Route path="/data-contract" element={<RequireAuth component={DataContractView} title="Data Contract" />} />
+      <Route path="/financial-projection/:productCode" element={<RequireAuth component={FinancialProjectionView} title="Financial Projection" />} />
+      <Route path="/talent-profile/:profileId" element={<RequireAuth component={TalentProfileView} title="Talent Profile" />} />
       <Route path="/ai/fraud" element={<RequireAuth component={FraudDetectionView} title="Fraud Detection" />} />
       <Route path="/ai/churn" element={<RequireAuth component={ChurnDetectionView} title="Churn Detection" />} />
       <Route path="/ai/:feature/:reportDate/psi" element={<RequireAuth component={PsiView} title="PSI Model Monitoring" />} />
       <Route path="/ua/audiences" element={<RequireAuth component={AudiencesView} title="Audiences" />} />
+      <Route path="/ua/audiences/:audienceId" element={<RequireAuth component={AudienceAnalysisView} title="Audience Analysis" />} />
       <Route path="/ua/audiences/build" element={<RequireAuth component={BuildAudienceView} title="Build Custom Audience" />} />
       <Route path="/ua/audiences/import" element={<RequireAuth component={ImportAudienceView} title="Import Predefined Audience Segments" />} />
       <Route path="/kyc/audit-logs" element={<RequireAuth component={AuditLogsView} title="KYC Audit Logs" />} />

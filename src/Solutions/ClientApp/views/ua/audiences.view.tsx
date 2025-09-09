@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { Grid, GridColumn } from 'rosie-ui';
 
 export function AudiencesView() {
   return <>
@@ -11,6 +12,16 @@ export function AudiencesView() {
         </NavLink>
       </div>
     </ol>
-    <main></main>
+    <main className="fullscreen">
+      <Grid fitScreen>
+        <GridColumn headerName="Audience Name" field="audienceName" style={{flex:1}} />
+        <GridColumn headerName="App Name" field="appName" style={{flex:1}} />
+        <GridColumn headerName="Business ID" field="businessId" style={{flex:1}} />
+        <GridColumn headerName="Status" field="status" style={{flex:1}} />
+        <GridColumn headerName="Volume" field="volume" style={{flex:1}} />
+        <GridColumn headerName="Creator" field="creator" style={{flex:1}} />
+        <GridColumn headerName="Creation Date" field="creationDate" style={{flex:1}} />
+      </Grid>
+    </main>
   </>
 }

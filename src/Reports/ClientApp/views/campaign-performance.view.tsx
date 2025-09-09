@@ -30,6 +30,8 @@ export function CampaignPerformanceView() {
         <GridColumn headerName="Installs" field="installs" style={{width:200}} />
         <GridColumn headerName="NRU" field="installs" style={{width:200}} />
         <GridColumn headerName="NPU" field="installs" style={{width:200}} />
+        <GridColumn headerName="DAU" field="installs" style={{width:200}} />
+        <GridColumn headerName="PU" field="installs" style={{width:200}} />
         <GridColumn headerName="CPA" field="installs" style={{width:200}} />
         <GridColumn headerName="ROAS" field="installs" style={{width:200}} />
       </Grid>

@@ -1,5 +1,4 @@
-import { NavItem } from 'rosie-ui';
-import { Model } from 'venus/core';
+import { NavItem, Model } from 'venus/core';
 
 export type SiteUser = {
   username: string,

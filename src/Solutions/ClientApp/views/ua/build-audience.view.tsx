@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { newOperation, QueryOperation, QueryOperationComponent } from 'rosie-ui';
 import { ruleCriteria } from 'solutions/core';
 
 export function BuildAudienceView() {
   const [audienceName, setAudienceName] = useState(''),
         [ruleset, setRuleset] = useState<QueryOperation>(newOperation());
-
-  useEffect(() => { console.log(ruleset); }, [ruleset])
 
   return <>
     <ol className="breadcrumb">

@@ -66,12 +66,32 @@ export const navigator: NavItem[] = [{
     navPath: '/kyc/audit-logs'
   }]
 }, {
+  navId: 'marketing-plans',
+  navName: 'Masterting Plans',
+  children: [{
+    navId: 'financial-projections',
+    navName: 'Financial Projections',
+    navPath: '/financial-projections',
+  }]
+}, {
   navId: 'misc',
   navName: 'Misc',
   children: [{
     navId: 'chat',
     navName: 'Chat',
     navPath: '/chat',
+  }, {
+    navId: 'financial-projection',
+    navName: 'Financial Projection',
+    navPath: '/financial-projection/1',
+  }, {
+    navId: 'talent-profile',
+    navName: 'Talent Profile',
+    navPath: '/talent-profile/1',
+  }, {
+    navId: 'data-contract',
+    navName: 'Data Contract',
+    navPath: '/data-contract/1',
   }]
 }]
 

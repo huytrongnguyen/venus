@@ -1,16 +1,23 @@
-// import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { useEffect } from 'react';
+import { HashRouter as Router, Navigate, Route, Routes } from 'react-router';
+import { LocalCache } from 'rosie-ui';
+
+import { AUTH_TOKEN, AuthUserModel } from 'venus/core';
+import { AppLayout, RequireAuth } from 'venus/components';
+import { navigator } from 'masterdata/core';
+import { ProductsView } from './products.view';
 
 export function AppView() {
-  return <>
-    <main className="d-flex flex-row align-items-center p-2">
-      <div className="dropdown">
-        <button type="button" className="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="false">AND</button>
-        <ul className="dropdown-menu">
-          <li><span className="dropdown-item">AND</span></li>
-          <li><span className="dropdown-item">OR</span></li>
-          <li><span className="dropdown-item">EXCLUDE</span></li>
-        </ul>
-      </div>
-    </main>
-  </>
+  useEffect(() => {
+    if (LocalCache.get(AUTH_TOKEN)) {
+      AuthUserModel.load();
+    }
+  }, []);
+
+  return <Router>
+    <AppLayout navigator={navigator} routes={<Routes>
+      <Route path="/products" element={<RequireAuth component={ProductsView} title="Products" />} />
+      <Route path="*" element={<Navigate to="/products" />} />
+    </Routes>} />
+  </Router>
 }
