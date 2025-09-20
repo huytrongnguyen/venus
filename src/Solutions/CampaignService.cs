@@ -1,4 +1,4 @@
-﻿namespace MasterData;
+﻿namespace Solutions;
 
 public class CampaignService {
   public void CreateCampaign(string campaignName) { }

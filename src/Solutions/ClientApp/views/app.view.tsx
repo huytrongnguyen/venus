@@ -9,11 +9,11 @@ import { navigator } from 'solutions/core';
 import { AudiencesView, ImportAudienceView, BuildAudienceView } from './ua';
 import { ChurnDetectionView, FraudDetectionView, PsiView } from './ai-features';
 import { AuditLogsView, AutoApprovalView } from './kyc';
-import { ChatView } from './chat.view';
-import { DataContractView } from './data-contract.view';
-import { AudienceAnalysisView } from './ua/audience-analysis.view';
+import { ChatView, DataContractView } from './misc';
+import { AudienceAnalysisView } from './ua';
 import { FinancialProjectionView } from './fa';
 import { TalentProfileView } from './hr';
+import { SearchExpense, ComplianceDashboard } from './exmgr';
 
 export function AppView() {
   useEffect(() => {
@@ -37,6 +37,8 @@ export function AppView() {
       <Route path="/ua/audiences/import" element={<RequireAuth component={ImportAudienceView} title="Import Predefined Audience Segments" />} />
       <Route path="/kyc/audit-logs" element={<RequireAuth component={AuditLogsView} title="KYC Audit Logs" />} />
       <Route path="/kyc/auto-approval" element={<RequireAuth component={AutoApprovalView} title="KYC Auto Approval" />} />
+      <Route path="/exmgr/dashboard" element={<RequireAuth component={ComplianceDashboard} title="Spend Compliance Dashboard" />} />
+      <Route path="/exmgr/search-expense" element={<RequireAuth component={SearchExpense} title="Search Expense" />} />
       <Route path="*" element={<Navigate to="/chat" />} />
     </Routes>} />
   </Router>

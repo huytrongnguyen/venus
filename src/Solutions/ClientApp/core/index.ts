@@ -66,12 +66,24 @@ export const navigator: NavItem[] = [{
     navPath: '/kyc/audit-logs'
   }]
 }, {
-  navId: 'marketing-plans',
-  navName: 'Masterting Plans',
+  navId: 'exmgr',
+  navName: 'Expense Manager',
   children: [{
-    navId: 'financial-projections',
-    navName: 'Financial Projections',
-    navPath: '/financial-projections',
+    navId: 'dashboard',
+    navName: 'Dashboard',
+    navPath: '/exmgr/dashboard'
+  }, {
+    navId: 'reporting',
+    navName: 'Reporting',
+    navPath: '/exmgr/reporting'
+  }, {
+    navId: 'audit-trail',
+    navName: 'Audit Trail',
+    navPath: '/exmgr/audit-trail'
+  }, {
+    navId: 'analytics',
+    navName: 'Analytics',
+    navPath: '/exmgr/analytics'
   }]
 }, {
   navId: 'misc',

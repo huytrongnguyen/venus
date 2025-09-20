@@ -32,6 +32,8 @@ services
     })
     .AddScoped<KycService>()
     .AddScoped<ChatService>()
+    .AddScoped<InvoiceService>()
+    .AddScoped<PaymentService>()
     .AddScoped<UserService>()
     .AddScoped<AuthService>()
     .AddCors()

@@ -26612,7 +26612,7 @@
   var import_client = __toESM(require_client());
 
   // src/Solutions/ClientApp/views/app.view.tsx
-  var import_react19 = __toESM(require_react());
+  var import_react18 = __toESM(require_react());
 
   // node_modules/react-router/dist/development/chunk-C37GKA54.mjs
   var React = __toESM(require_react(), 1);
@@ -37741,12 +37741,24 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       navPath: "/kyc/audit-logs"
     }]
   }, {
-    navId: "marketing-plans",
-    navName: "Masterting Plans",
+    navId: "exmgr",
+    navName: "Expense Manager",
     children: [{
-      navId: "financial-projections",
-      navName: "Financial Projections",
-      navPath: "/financial-projections"
+      navId: "dashboard",
+      navName: "Dashboard",
+      navPath: "/exmgr/dashboard"
+    }, {
+      navId: "reporting",
+      navName: "Reporting",
+      navPath: "/exmgr/reporting"
+    }, {
+      navId: "audit-trail",
+      navName: "Audit Trail",
+      navPath: "/exmgr/audit-trail"
+    }, {
+      navId: "analytics",
+      navName: "Analytics",
+      navPath: "/exmgr/analytics"
     }]
   }, {
     navId: "misc",
@@ -37756,9 +37768,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       navName: "Chat",
       navPath: "/chat"
     }, {
+      navId: "financial-projection",
+      navName: "Financial Projection",
+      navPath: "/financial-projection/1"
+    }, {
+      navId: "talent-profile",
+      navName: "Talent Profile",
+      navPath: "/talent-profile/1"
+    }, {
       navId: "data-contract",
       navName: "Data Contract",
-      navPath: "/data-contract"
+      navPath: "/data-contract/1"
     }]
   }];
   var ruleCriteria = [];
@@ -37849,44 +37869,60 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ] });
   }
 
-  // src/Solutions/ClientApp/views/ai-features/fraud.view.tsx
+  // src/Solutions/ClientApp/views/ua/audience-analysis.view.tsx
   var import_react12 = __toESM(require_react());
   var import_jsx_runtime19 = __toESM(require_jsx_runtime());
-  function FraudDetectionView() {
-    const [reportDate, setReportDate] = (0, import_react12.useState)(Date.currentDate().minus(1));
+  function AudienceAnalysisView() {
+    const { audienceId } = useParams(), [ruleset, setRuleset] = (0, import_react12.useState)(newOperation());
     return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(import_jsx_runtime19.Fragment, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("ol", { className: "breadcrumb", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item", children: "AI Features" }),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item active", children: "Fraud Detection" }),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("div", { className: "d-flex flex-row ms-auto", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(NavLink, { to: `/ai/fraud/${reportDate.format()}/psi`, className: "btn btn-sm btn-outline-secondary me-2", style: { width: 100 }, children: "View PSI" }),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DatePicker, { className: "input-group-sm", value: reportDate, onChange: setReportDate })
-        ] })
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item", children: "User Acquisition" }),
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item active", children: "Audiences" }),
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("li", { className: "breadcrumb-item active", children: audienceId })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("main", { className: "fullscreen d-flex flex-row", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "w-25" }),
-        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "fullscreen w-75", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(Grid, { fitHeight: true, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Report Date", field: "reportDate", style: { width: 150 } }),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "User ID", field: "userId", style: { width: 150 } }),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Platform", field: "platform", style: { width: 150 } }),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Fraud Level", field: "fraudLevel", style: { width: 150 } }),
-          /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Probability", field: "fraudProba", style: { width: 150 } })
-        ] }) })
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)("main", { className: "fullscreen d-flex flex-column", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+          QueryOperationComponent,
+          {
+            operation: ruleset,
+            criteria: ruleCriteria,
+            index: 0,
+            onChange: (operation, _index) => setRuleset(operation)
+          }
+        ) }),
+        /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("div", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(CampaignGrid, {}) })
       ] })
     ] });
   }
+  function CampaignGrid() {
+    return /* @__PURE__ */ (0, import_jsx_runtime19.jsxs)(Grid, { fitHeight: true, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Media Source", field: "mediaSource", style: { width: 150 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Campaign", field: "campaignName", style: { width: 150 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Adset", field: "adsetName", style: { width: 150 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Ad", field: "adName", style: { width: 150 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Revenue", field: "revenue", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Cost", field: "cost", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Impressions", field: "impressions", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Clicks", field: "clicks", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "Installs", field: "installs", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "NRU", field: "installs", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "NPU", field: "installs", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "CPA", field: "installs", style: { width: 200 } }),
+      /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(GridColumn, { headerName: "ROAS", field: "installs", style: { width: 200 } })
+    ] });
+  }
 
-  // src/Solutions/ClientApp/views/ai-features/churn.view.tsx
+  // src/Solutions/ClientApp/views/ai-features/fraud.view.tsx
   var import_react13 = __toESM(require_react());
   var import_jsx_runtime20 = __toESM(require_jsx_runtime());
-  function ChurnDetectionView() {
+  function FraudDetectionView() {
     const [reportDate, setReportDate] = (0, import_react13.useState)(Date.currentDate().minus(1));
     return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(import_jsx_runtime20.Fragment, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("ol", { className: "breadcrumb", children: [
         /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("li", { className: "breadcrumb-item", children: "AI Features" }),
-        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("li", { className: "breadcrumb-item active", children: "Churn Detection" }),
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("li", { className: "breadcrumb-item active", children: "Fraud Detection" }),
         /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "d-flex flex-row ms-auto", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(NavLink, { to: `/ua/audiences/import`, className: "btn btn-sm btn-outline-secondary me-2", style: { width: 300 }, children: "Import Audience" }),
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(NavLink, { to: `/ai/fraud/${reportDate.format()}/psi`, className: "btn btn-sm btn-outline-secondary me-2", style: { width: 100 }, children: "View PSI" }),
           /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(DatePicker, { className: "input-group-sm", value: reportDate, onChange: setReportDate })
         ] })
       ] }),
@@ -37896,38 +37932,65 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(GridColumn, { headerName: "Report Date", field: "reportDate", style: { width: 150 } }),
           /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(GridColumn, { headerName: "User ID", field: "userId", style: { width: 150 } }),
           /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(GridColumn, { headerName: "Platform", field: "platform", style: { width: 150 } }),
-          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(GridColumn, { headerName: "Churn Level", field: "fraudLevel", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(GridColumn, { headerName: "Fraud Level", field: "fraudLevel", style: { width: 150 } }),
           /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(GridColumn, { headerName: "Probability", field: "fraudProba", style: { width: 150 } })
         ] }) })
       ] })
     ] });
   }
 
-  // src/Solutions/ClientApp/views/ai-features/psi.view.tsx
+  // src/Solutions/ClientApp/views/ai-features/churn.view.tsx
+  var import_react14 = __toESM(require_react());
   var import_jsx_runtime21 = __toESM(require_jsx_runtime());
-  function PsiView() {
-    const { feature, reportDate } = useParams();
+  function ChurnDetectionView() {
+    const [reportDate, setReportDate] = (0, import_react14.useState)(Date.currentDate().minus(1));
     return /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(import_jsx_runtime21.Fragment, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("ol", { className: "breadcrumb", children: [
         /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("li", { className: "breadcrumb-item", children: "AI Features" }),
-        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("li", { className: "breadcrumb-item", children: feature }),
-        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("li", { className: "breadcrumb-item", children: reportDate }),
-        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("li", { className: "breadcrumb-item active", children: "PSI" })
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("li", { className: "breadcrumb-item active", children: "Churn Detection" }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "d-flex flex-row ms-auto", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(NavLink, { to: `/ua/audiences/import`, className: "btn btn-sm btn-outline-secondary me-2", style: { width: 300 }, children: "Import Audience" }),
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(DatePicker, { className: "input-group-sm", value: reportDate, onChange: setReportDate })
+        ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("main", { className: "fullscreen" })
+      /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("main", { className: "fullscreen d-flex flex-row", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "w-25" }),
+        /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "fullscreen w-75", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)(Grid, { fitHeight: true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Report Date", field: "reportDate", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "User ID", field: "userId", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Platform", field: "platform", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Churn Level", field: "fraudLevel", style: { width: 150 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(GridColumn, { headerName: "Probability", field: "fraudProba", style: { width: 150 } })
+        ] }) })
+      ] })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/ai-features/psi.view.tsx
+  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  function PsiView() {
+    const { feature, reportDate } = useParams();
+    return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item", children: "AI Features" }),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item", children: feature }),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item", children: reportDate }),
+        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item active", children: "PSI" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("main", { className: "fullscreen" })
     ] });
   }
 
   // src/Solutions/ClientApp/views/kyc/audit-logs.view.tsx
-  var import_react14 = __toESM(require_react());
-  var import_jsx_runtime22 = __toESM(require_jsx_runtime());
+  var import_react15 = __toESM(require_react());
+  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
   function AuditLogsView() {
-    const [endDate, setEndDate] = (0, import_react14.useState)(Date.currentDate().minus(1)), [startDate, setStartDate] = (0, import_react14.useState)(endDate.minus(7)), [page, setPage] = (0, import_react14.useState)(1), [size, setSize] = (0, import_react14.useState)(10), [total, setTotal] = (0, import_react14.useState)(1), [auditLogs, setAuditLogs] = (0, import_react14.useState)([]);
-    return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("ol", { className: "breadcrumb", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("li", { className: "breadcrumb-item active", children: "Audit Logs" }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+    const [endDate, setEndDate] = (0, import_react15.useState)(Date.currentDate().minus(1)), [startDate, setStartDate] = (0, import_react15.useState)(endDate.minus(7)), [page, setPage] = (0, import_react15.useState)(1), [size, setSize] = (0, import_react15.useState)(10), [total, setTotal] = (0, import_react15.useState)(1), [auditLogs, setAuditLogs] = (0, import_react15.useState)([]);
+    return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(import_jsx_runtime23.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("li", { className: "breadcrumb-item active", children: "Audit Logs" }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
           DateRangePicker,
           {
             className: "input-group-sm",
@@ -37940,55 +38003,55 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           }
         ) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(Grid, { fitHeight: true, pagingToolbar: true, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(GridColumn, { headerName: "Request ID", field: "requestId", style: { width: 150 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(GridColumn, { headerName: "Request Date", field: "requestDate", style: { width: 150 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(GridColumn, { headerName: "Front", field: "front", style: { width: 200 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(GridColumn, { headerName: "Back", field: "back", style: { width: 200 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(GridColumn, { headerName: "Selfie", field: "selfie", style: { width: 200 } }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(GridColumn, { headerName: "OCR", field: "ocr", style: { width: 200 }, renderer: (value) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(Grid, { fitHeight: true, pagingToolbar: true, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Request ID", field: "requestId", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Request Date", field: "requestDate", style: { width: 150 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Front", field: "front", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Back", field: "back", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Selfie", field: "selfie", style: { width: 200 } }),
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "OCR", field: "ocr", style: { width: 200 }, renderer: (value) => {
+          return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(import_jsx_runtime23.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "SSN: ",
               value?.ssn
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Name: ",
               value?.name
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "DOB: ",
               value?.dob
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Gender: ",
               value?.gender
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Address: ",
               value?.address
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Given Date: ",
               value?.givenDate
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Given Place: ",
               value?.givenPlace
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Due Date: ",
               value?.dueDate
             ] })
           ] });
         } }),
-        /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(GridColumn, { headerName: "Face Matching", field: "faceMatching", style: { width: 200 }, renderer: (value) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(GridColumn, { headerName: "Face Matching", field: "faceMatching", style: { width: 200 }, renderer: (value) => {
+          return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(import_jsx_runtime23.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Matched: ",
               value?.matched ? "TRUE" : "FALSE"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { children: [
               "Confidence Score: ",
               value?.confidence
             ] })
@@ -37999,40 +38062,40 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   }
 
   // src/Solutions/ClientApp/views/kyc/auto-approval.view.tsx
-  var import_react15 = __toESM(require_react());
-  var import_jsx_runtime23 = __toESM(require_jsx_runtime());
+  var import_react16 = __toESM(require_react());
+  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
   function AutoApprovalView() {
-    const [step, setStep] = (0, import_react15.useState)(1), [requestId] = (0, import_react15.useState)(generateRequestId());
-    return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(import_jsx_runtime23.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("ol", { className: "breadcrumb", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("li", { className: "breadcrumb-item active", children: "Auto Approval" }),
-        /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("button", { type: "button", className: "btn btn-sm btn-outline-secondary", onClick: () => location.reload(), children: "Refresh" }) })
+    const [step, setStep] = (0, import_react16.useState)(1), [requestId] = (0, import_react16.useState)(generateRequestId());
+    return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(import_jsx_runtime24.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("li", { className: "breadcrumb-item", children: "KYC" }),
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("li", { className: "breadcrumb-item active", children: "Auto Approval" }),
+        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("button", { type: "button", className: "btn btn-sm btn-outline-secondary", onClick: () => location.reload(), children: "Refresh" }) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("main", { className: "fullscreen overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "container-fluid", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "col-12 col-md-3", children: [
-        step === 1 && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(TakeIdImage, { requestId }),
-        step === 2 && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(TakeIdImage, { requestId }),
-        step === 3 && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(TakeSelfieImage, { requestId }),
-        step === 4 && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Verification, { requestId })
+      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("main", { className: "fullscreen overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "container-fluid", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "row", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "col-12 col-md-3", children: [
+        step === 1 && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(TakeIdImage, { requestId }),
+        step === 2 && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(TakeIdImage, { requestId }),
+        step === 3 && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(TakeSelfieImage, { requestId }),
+        step === 4 && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Verification, { requestId })
       ] }) }) }) })
     ] });
   }
   function TakeIdImage(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_jsx_runtime23.Fragment, {});
+    return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_jsx_runtime24.Fragment, {});
   }
   function TakeSelfieImage(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_jsx_runtime23.Fragment, {});
+    return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_jsx_runtime24.Fragment, {});
   }
   function Verification(props) {
-    return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_jsx_runtime23.Fragment, {});
+    return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_jsx_runtime24.Fragment, {});
   }
 
-  // src/Solutions/ClientApp/views/chat.view.tsx
-  var import_react16 = __toESM(require_react());
-  var import_jsx_runtime24 = __toESM(require_jsx_runtime());
+  // src/Solutions/ClientApp/views/misc/chat.view.tsx
+  var import_react17 = __toESM(require_react());
+  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
   function ChatView() {
-    const [sessionId] = (0, import_react16.useState)(Rosie.guid()), [question, setQuestion] = (0, import_react16.useState)(""), [conversation, setConversation] = (0, import_react16.useState)([]);
-    (0, import_react16.useEffect)(() => {
+    const [sessionId] = (0, import_react17.useState)(Rosie.guid()), [question, setQuestion] = (0, import_react17.useState)(""), [conversation, setConversation] = (0, import_react17.useState)([]);
+    (0, import_react17.useEffect)(() => {
       const chatHistory = document.getElementById("chat-history");
       chatHistory.scrollTop = chatHistory.scrollHeight;
     }, [conversation]);
@@ -38054,15 +38117,15 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         document.getElementById("send-question").click();
       }
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(import_jsx_runtime24.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("ol", { className: "breadcrumb", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("li", { className: "breadcrumb-item active", children: "Chat" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("main", { className: "fullscreen d-flex flex-column", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { id: "chat-history", className: "fullscreen d-flex flex-column chat-body overflow-y-auto p-2", children: conversation.map((message, index) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(import_jsx_runtime25.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("ol", { className: "breadcrumb", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("li", { className: "breadcrumb-item active", children: "Chat" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("main", { className: "fullscreen d-flex flex-column", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { id: "chat-history", className: "fullscreen d-flex flex-column chat-body overflow-y-auto p-2", children: conversation.map((message, index) => {
           if (!message.content) return null;
-          return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_react16.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: `d-flex ${message.type} mb-2`, children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "card", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "card-body p-2", children: message.content }) }) }) }, index);
+          return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(import_react17.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: `d-flex ${message.type} mb-2`, children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "card", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "card-body p-2", children: message.content }) }) }) }, index);
         }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "chat-footer p-2", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "d-flex", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "chat-footer p-2", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "d-flex", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
             "textarea",
             {
               className: "form-control",
@@ -38073,7 +38136,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
               onKeyUp: handleChatInputKeyUp
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(
             "button",
             {
               id: "send-question",
@@ -38088,114 +38151,267 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ] });
   }
 
-  // src/Solutions/ClientApp/views/data-contract.view.tsx
-  var import_jsx_runtime25 = __toESM(require_jsx_runtime());
-  function DataContractView() {
-    return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(import_jsx_runtime25.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("ol", { className: "breadcrumb", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("li", { className: "breadcrumb-item active", children: "Data Contract" }) }) });
-  }
-
-  // src/Solutions/ClientApp/views/ua/audience-analysis.view.tsx
-  var import_react17 = __toESM(require_react());
+  // src/Solutions/ClientApp/views/misc/data-contract.view.tsx
   var import_jsx_runtime26 = __toESM(require_jsx_runtime());
-  function AudienceAnalysisView() {
-    const { audienceId } = useParams(), [ruleset, setRuleset] = (0, import_react17.useState)(newOperation());
-    return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(import_jsx_runtime26.Fragment, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("ol", { className: "breadcrumb", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("li", { className: "breadcrumb-item", children: "User Acquisition" }),
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("li", { className: "breadcrumb-item active", children: "Audiences" }),
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("li", { className: "breadcrumb-item active", children: audienceId })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)("main", { className: "fullscreen d-flex flex-column", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(
-          QueryOperationComponent,
-          {
-            operation: ruleset,
-            criteria: ruleCriteria,
-            index: 0,
-            onChange: (operation, _index) => setRuleset(operation)
-          }
-        ) }),
-        /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(CampaignGrid, {}) })
-      ] })
-    ] });
-  }
-  function CampaignGrid() {
-    return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(Grid, { fitHeight: true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Media Source", field: "mediaSource", style: { width: 150 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Campaign", field: "campaignName", style: { width: 150 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Adset", field: "adsetName", style: { width: 150 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Ad", field: "adName", style: { width: 150 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Revenue", field: "revenue", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Cost", field: "cost", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Impressions", field: "impressions", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Clicks", field: "clicks", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "Installs", field: "installs", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "NRU", field: "installs", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "NPU", field: "installs", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "CPA", field: "installs", style: { width: 200 } }),
-      /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(GridColumn, { headerName: "ROAS", field: "installs", style: { width: 200 } })
-    ] });
+  function DataContractView() {
+    return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(import_jsx_runtime26.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("ol", { className: "breadcrumb", children: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("li", { className: "breadcrumb-item active", children: "Data Contract" }) }) });
   }
 
-  // src/Solutions/ClientApp/views/marketing-plans/financial-projection.view.tsx
-  var import_react18 = __toESM(require_react());
+  // src/Solutions/ClientApp/views/fa/financial-projection.view.tsx
   var import_jsx_runtime27 = __toESM(require_jsx_runtime());
   function FinancialProjectionView() {
-    const [endDate, setEndDate] = (0, import_react18.useState)(Date.currentDate().minus(1)), [startDate, setStartDate] = (0, import_react18.useState)(endDate.minus(7)), [page, setPage] = (0, import_react18.useState)(1), [size, setSize] = (0, import_react18.useState)(10), [total, setTotal] = (0, import_react18.useState)(1), [projections, setProjections] = (0, import_react18.useState)([]);
+    const { productCode } = useParams();
     return /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(import_jsx_runtime27.Fragment, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("ol", { className: "breadcrumb", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { className: "breadcrumb-item active", children: "Marketing Plans" }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { className: "breadcrumb-item active", children: "Financial Projection" }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
-          DateRangePicker,
-          {
-            className: "input-group-sm",
-            start: startDate,
-            end: endDate,
-            onChange: (start2, end2) => {
-              setStartDate(start2);
-              setEndDate(end2);
-            }
-          }
-        ) })
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { className: "breadcrumb-item", children: "Financial Projection" }),
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("li", { className: "breadcrumb-item active", children: productCode })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)(Grid, { fitHeight: true, pagingToolbar: true, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(GridColumn, { headerName: "Code", field: "projectCode", style: { flex: 1 }, renderer: (value, record) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(Link, { to: `/projects/${record.get("projectCode")}/scenario`, children: value });
-        } }),
-        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(GridColumn, { headerName: "Status", field: "status", style: { flex: 1 } })
+      /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "rosie-grid rosie-grid-bordered rosie-grid-striped rosie-grid-hover d-flex flex-row fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "rosie-grid-viewport d-flex flex-column fullscreen", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "rosie-grid-header fw-bold bg-light overflow-hidden d-flex flex-column", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "rosie-grid-row d-flex flex-row", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "rosie-grid-cell p-1", style: { width: 100 }, children: "Region" }),
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "rosie-grid-cell p-1", style: { width: 100 }, children: "Metric" }),
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { style: { width: Rosie.SCROLLBAR_WIDTH } })
+        ] }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "rosie-grid-body fullscreen overflow-x-auto d-flex flex-column", children: /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime27.jsxs)("div", { className: "rosie-grid-row d-flex flex-row", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "rosie-grid-cell p-1", style: { width: 100 }, children: "JP" }),
+          /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "rosie-grid-cell p-1", style: { width: 100 }, children: "Installs" })
+        ] }) }) })
+      ] }) }) })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/hr/talent-profile.view.tsx
+  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
+  function TalentProfileView() {
+    const { profileId } = useParams();
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(import_jsx_runtime28.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { className: "breadcrumb-item", children: "Talent Profile" }),
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { className: "breadcrumb-item active", children: profileId })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "d-flex flex-row fullscreen", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "fullscreen", style: { width: "25rem" }, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "offset-4 col-4 img-fluid rounded-circle mb-2" }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "text-primary text-center fw-bold" }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "text-center fw-bold mb-2" }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 text-muted text-end", children: "Role:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 fw-normal" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 text-muted text-end", children: "Level:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 fw-normal" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 text-muted text-end", children: "Joining date:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 fw-normal" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 text-muted text-end", children: "Performance Rating:" }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6 fw-normal" })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "fullscreen", style: { flex: 1 }, children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card fullscreen", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("ul", { className: "nav nav-pills card-header-pills justify-content-center", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { role: "button", className: "nav-item", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "nav-link rounded-pill", children: "Working History" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { role: "button", className: "nav-item", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "nav-link rounded-pill", children: "Performance" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("li", { role: "button", className: "nav-item", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "nav-link rounded-pill", children: "Talent Mapping" }) })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card-body fullscreen", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card-group fullscreen", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card border-top-0 border-bottom-0 border-start-0 fullscreen", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header", children: "Projects" }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "overflow-scroll-y", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "list-group list-group-flush" }) })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card border-top-0 border-bottom-0 border-start-0 fullscreen", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header", children: "Roles" }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "overflow-scroll-y", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "list-group list-group-flush" }) })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(Grid, { fitScreen: true, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(GridColumn, { headerName: "Period", field: "period", style: { width: 100 } }),
+              /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(GridColumn, { headerName: "Performance Rating", field: "rating", style: { width: 200 } }),
+              /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(GridColumn, { headerName: "Comment", field: "comment", style: { flex: 1 } })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card border-0 fullscreen", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header p-2 d-flex", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "ms-auto", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("button", { type: "button", className: "btn btn-sm btn-outline-secondary me-2", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "fa fa-xmark me-1" }),
+                  " Reset"
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("button", { type: "button", className: "btn btn-sm btn-primary", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("span", { className: "fa fa-check me-1" }),
+                  " Save"
+                ] })
+              ] }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card-body p-2 fullscreen", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header", children: "Personal Career Aspiration" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-body p-0", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("textarea", { rows: 3, className: "form-control border-0" }) })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row mt-3", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-3", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "form-label fw-bold", children: "Retention risk" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "btn-group", role: "group" })
+                  ] }) }),
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-3", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "form-label fw-bold", children: "Strengths" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "btn-group", role: "group" })
+                  ] }) }),
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "form-label fw-bold", children: "Traits" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "btn-group", role: "group" })
+                  ] }) })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row mt-3", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "col-6", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("label", { className: "form-label fw-bold", children: "Future Potential Roles/ Assignments" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("input", { type: "text", className: "form-control" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("label", { className: "form-label fw-bold", children: "Experience of Interest" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("input", { type: "text", className: "form-control" })
+                  ] }),
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "col-6", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("label", { className: "form-label fw-bold", children: "Development Requirements" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header", children: "success in the role" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-body p-0", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("textarea", { rows: 3, className: "form-control border-0" }) })
+                      ] }) }),
+                      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header", children: "career growth" }),
+                        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-body p-0", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("textarea", { rows: 3, className: "form-control border-0" }) })
+                      ] }) })
+                    ] })
+                  ] })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "row mt-3", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "col-6", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "card", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-header", children: "Result" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "card-body p-0", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "container-fluid", children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "row" }) }) })
+                  ] }) }),
+                  /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "col-6", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("label", { className: "form-label fw-bold", children: "Successor for" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("input", { type: "text", className: "form-control" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)("div", { className: "mt-2", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("label", { className: "form-label fw-bold", children: "Readiness" }),
+                      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("input", { type: "text", className: "form-control" })
+                    ] })
+                  ] })
+                ] })
+              ] })
+            ] })
+          ] })
+        ] }) })
       ] }) })
     ] });
   }
 
+  // src/Solutions/ClientApp/views/exmgr/nav-pills.component.tsx
+  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
+  function NavPillsComponent() {
+    return /* @__PURE__ */ (0, import_jsx_runtime29.jsxs)(import_jsx_runtime29.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(NavLink, { to: "/exmgr/search-expense", className: "btn btn-sm btn-outline-secondary ms-2", style: { width: 100 }, children: "Search" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(NavLink, { to: "/exmgr/create-expense", className: "btn btn-sm btn-outline-secondary ms-2", style: { width: 100 }, children: "Create" }),
+      /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(NavLink, { to: "/exmgr/import-expense", className: "btn btn-sm btn-outline-secondary ms-2", style: { width: 100 }, children: "Import" })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/exmgr/dashboard.view.tsx
+  var import_jsx_runtime30 = __toESM(require_jsx_runtime());
+  function ComplianceDashboard() {
+    return /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(import_jsx_runtime30.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("li", { className: "breadcrumb-item", children: "Expense Manager" }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("li", { className: "breadcrumb-item active", children: "Dashboard" }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "d-flex flex-row ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(NavPillsComponent, {}) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("main", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("div", { className: "card border-0 rounded-0 fullscreen", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "card-header", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)("ul", { className: "nav nav-tabs card-header-tabs", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("li", { className: "nav-item", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "nav-link active", children: "Insight Dashboard" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("li", { className: "nav-item", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "nav-link", children: "CMS Dashboard" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("li", { className: "nav-item", children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "nav-link", children: "Compliance Dashboard" }) })
+        ] }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "card-body fullscreen" })
+      ] }) })
+    ] });
+  }
+
+  // src/Solutions/ClientApp/views/exmgr/search.view.tsx
+  var import_jsx_runtime31 = __toESM(require_jsx_runtime());
+  function SearchExpense() {
+    return /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(import_jsx_runtime31.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("ol", { className: "breadcrumb", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("li", { className: "breadcrumb-item", children: "Expense Manager" }),
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("li", { className: "breadcrumb-item active", children: "Search" }),
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "d-flex flex-row ms-auto", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(NavPillsComponent, {}) })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("main", { className: "fullscreen d-flex flex-column", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "p-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "row mb-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("label", { htmlFor: "expenseId", className: "col-2 col-form-label", children: "Expense ID" }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "col-4", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("input", { type: "text", id: "expenseId", className: "form-control" }) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "row mb-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("label", { htmlFor: "owner", className: "col-2 col-form-label", children: "Expense Owner" }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "col-4", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("input", { type: "text", id: "owner", className: "form-control" }) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "row mb-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("label", { htmlFor: "taxId", className: "col-2 col-form-label", children: "Tax Number" }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "col-4", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("input", { type: "text", id: "taxId", className: "form-control" }) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "row mb-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("label", { htmlFor: "divisions", className: "col-2 col-form-label", children: "Divisions" }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "col-4", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("input", { type: "text", id: "divisions", className: "form-control" }) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "row mb-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("label", { htmlFor: "purpose", className: "col-2 col-form-label", children: "Purpose" }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "col-4", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("input", { type: "text", id: "purpose", className: "form-control" }) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)("div", { className: "row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("label", { htmlFor: "businessName", className: "col-2 col-form-label", children: "Business Name" }),
+            /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "col-4", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("input", { type: "text", id: "businessName", className: "form-control" }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "fullscreen", children: /* @__PURE__ */ (0, import_jsx_runtime31.jsxs)(Grid, { fitScreen: true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(GridColumn, { headerName: "Expense ID", field: "expenseId", style: { flex: 1 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(GridColumn, { headerName: "Division", field: "division", style: { flex: 1 } }),
+          /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(GridColumn, { headerName: "Description", field: "description", style: { flex: 1 } })
+        ] }) })
+      ] })
+    ] });
+  }
+
   // src/Solutions/ClientApp/views/app.view.tsx
-  var import_jsx_runtime28 = __toESM(require_jsx_runtime());
+  var import_jsx_runtime32 = __toESM(require_jsx_runtime());
   function AppView() {
-    (0, import_react19.useEffect)(() => {
+    (0, import_react18.useEffect)(() => {
       if (LocalCache.get(AUTH_TOKEN)) {
         AuthUserModel.load();
       }
     }, []);
-    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(HashRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(AppLayout, { navigator: navigator2, routes: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(Routes, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/chat", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: ChatView, title: "Chat" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/data-contract", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: DataContractView, title: "Data Contract" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/financial-projection", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: FinancialProjectionView, title: "Financial Projection" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/ai/fraud", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: FraudDetectionView, title: "Fraud Detection" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/ai/churn", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: ChurnDetectionView, title: "Churn Detection" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/ai/:feature/:reportDate/psi", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: PsiView, title: "PSI Model Monitoring" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/ua/audiences", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: AudiencesView, title: "Audiences" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/ua/audiences/:audienceId", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: AudienceAnalysisView, title: "Audience Analysis" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/ua/audiences/build", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: BuildAudienceView, title: "Build Custom Audience" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/ua/audiences/import", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: ImportAudienceView, title: "Import Predefined Audience Segments" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/kyc/audit-logs", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: AuditLogsView, title: "KYC Audit Logs" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "/kyc/auto-approval", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(RequireAuth, { component: AutoApprovalView, title: "KYC Auto Approval" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(Navigate, { to: "/chat" }) })
+    return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(HashRouter, { children: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(AppLayout, { navigator: navigator2, routes: /* @__PURE__ */ (0, import_jsx_runtime32.jsxs)(Routes, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/chat", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: ChatView, title: "Chat" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/data-contract", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: DataContractView, title: "Data Contract" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/financial-projection/:productCode", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: FinancialProjectionView, title: "Financial Projection" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/talent-profile/:profileId", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: TalentProfileView, title: "Talent Profile" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/ai/fraud", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: FraudDetectionView, title: "Fraud Detection" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/ai/churn", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: ChurnDetectionView, title: "Churn Detection" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/ai/:feature/:reportDate/psi", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: PsiView, title: "PSI Model Monitoring" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/ua/audiences", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: AudiencesView, title: "Audiences" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/ua/audiences/:audienceId", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: AudienceAnalysisView, title: "Audience Analysis" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/ua/audiences/build", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: BuildAudienceView, title: "Build Custom Audience" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/ua/audiences/import", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: ImportAudienceView, title: "Import Predefined Audience Segments" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/kyc/audit-logs", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: AuditLogsView, title: "KYC Audit Logs" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/kyc/auto-approval", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: AutoApprovalView, title: "KYC Auto Approval" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/exmgr/dashboard", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: ComplianceDashboard, title: "Spend Compliance Dashboard" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "/exmgr/search-expense", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(RequireAuth, { component: SearchExpense, title: "Search Expense" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Route, { path: "*", element: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(Navigate, { to: "/chat" }) })
     ] }) }) });
   }
 
   // src/Solutions/ClientApp/app.tsx
-  var import_jsx_runtime29 = __toESM(require_jsx_runtime());
-  (0, import_client.createRoot)(document.getElementById("react-root")).render(/* @__PURE__ */ (0, import_jsx_runtime29.jsx)(AppView, {}));
+  var import_jsx_runtime33 = __toESM(require_jsx_runtime());
+  (0, import_client.createRoot)(document.getElementById("react-root")).render(/* @__PURE__ */ (0, import_jsx_runtime33.jsx)(AppView, {}));
 })();
 /*! Bundled license information:
 
