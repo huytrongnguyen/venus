@@ -10,7 +10,7 @@ public record PaymentRecord(
   string PaymentMethod,
   PaymentAccountRecord Debtor,
   PaymentAccountRecord Creditor,
-  List<BalanceOffsetRecord> BalanceOffsets,
+  List<PaymentAllocationRecord> Allocations,
   DateTime CreatedAt,
   DateTime UpdatedAt
 ) : AuditEntity(CreatedAt, UpdatedAt)
@@ -35,14 +35,13 @@ public record PaymentRecord(
   );
 }
 
-public record BalanceOffsetRecord(string BalanceOffsetType, double Amount) {
-  #region BalanceOffsetType
+public record PaymentAllocationRecord(string AllocationType, double Amount) {
+  #region AllocationType
   public const string FULL = "FULL";
   public const string PARTIAL = "PARTIAL";
-  public const string REFUND = "REFUND";
   #endregion
 
-  public static BalanceOffsetRecord Mock() => new(FULL, 0);
+  public static PaymentAllocationRecord Mock() => new(FULL, 0);
 }
 
 public record PaymentSearchCriteria();
