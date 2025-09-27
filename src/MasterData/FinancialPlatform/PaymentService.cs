@@ -1,6 +1,6 @@
 using Shared;
 
-namespace Solutions;
+namespace MasterData.FinancialPlatform;
 
 public class PaymentService {
   public RecordPage<PaymentRecord> List(PaymentSearchCriteria criteria, int page, int size, string sort) => RecordPage<PaymentRecord>.Mock();

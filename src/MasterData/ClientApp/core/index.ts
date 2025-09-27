@@ -11,6 +11,10 @@ export const navigator: NavItem[] = [{
     navId: 'invoices',
     navName: 'Invoices',
     navPath: '/finance-platform/sales/invoices',
+  }, {
+    navId: 'business-account',
+    navName: 'Business Account',
+    navPath: '/finance-platform/business-account',
   }]
 }, {
   navId: 'products',

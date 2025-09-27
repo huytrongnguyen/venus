@@ -6,6 +6,7 @@ import { AUTH_TOKEN, AuthUserModel } from 'venus/core';
 import { AppLayout, RequireAuth } from 'venus/components';
 import { navigator } from 'masterdata/core';
 import { ProductsView } from './products.view';
+import { WalletView, InvoiceListView, PurchaseOrderListView } from './financial-platform';
 
 export function AppView() {
   useEffect(() => {
@@ -17,6 +18,10 @@ export function AppView() {
   return <Router>
     <AppLayout navigator={navigator} routes={<Routes>
       <Route path="/products" element={<RequireAuth component={ProductsView} title="Products" />} />
+      <Route path="/finance-platform/purchase/purchase-orders" element={<RequireAuth component={PurchaseOrderListView} title="Purchase Orders" />} />
+      <Route path="/finance-platform/sales/invoices" element={<RequireAuth component={InvoiceListView} title="Invoices" />} />
+      <Route path="/finance-platform/business-account/:accountId" element={<RequireAuth component={WalletView} title="Business Account" />} />
+      <Route path="/finance-platform/business-account" element={<Navigate to="/finance-platform/business-account/1" />} />
       <Route path="*" element={<Navigate to="/products" />} />
     </Routes>} />
   </Router>

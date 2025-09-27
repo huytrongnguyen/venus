@@ -10,7 +10,7 @@ export function PurchaseOrderListView() {
     <main className="fullscreen">
       <Grid fitHeight pagingToolbar>
         <GridColumn headerName="Vendor" field="senderId" style={{flex:1}} />
-        <GridColumn headerName="Status" field="stauts" style={{flex:1}} />
+        <GridColumn headerName="Status" field="status" style={{flex:1}} />
         <GridColumn headerName="Created At" field="createdAt" style={{flex:1}} />
       </Grid>
     </main>

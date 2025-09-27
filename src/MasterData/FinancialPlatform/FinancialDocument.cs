@@ -19,34 +19,69 @@ public record FinancialDocumentRecord(
   string DocumentType,
   DateOnly IssueDate,
   DateOnly DueDate,
-  long SenderId,
-  long RecipientId,
   double TotalAmount,
-  string Currency,
   double TaxAmount,
+  string Currency,
   string DocumentStatus,
-  List<DocumentItemRecord> Items,
+  List<FinancialDocumentPartyRecord> Parties,
+  List<FinancialDocumentItemRecord> Items,
   Dictionary<string, object> Extends,
   DateTime CreatedAt,
   DateTime UpdatedAt
 )
 {
   #region DocumentType
-  public const string PurchaseOrder = "Purchase Order";
+  public const string PURCHASE_ORDER = "PURCHASE_ORDER";
+  public const string INVOICE = "INVOICE";
   #endregion
 
   #region Status
-  // Draft, Approved, Sent, Received, Closed
-  public const string Draft = "Draft";
+  // Draft, Waiting For Approval, Approved, Sent, Received, Closed
+  public const string DRAFT = "DRAFT";
+  #endregion
+
+  public static FinancialDocumentRecord Mock() => new(
+    "1", INVOICE, DateOnly.FromDateTime(DateTime.UtcNow), DateOnly.FromDateTime(DateTime.UtcNow),
+    0, 0, "USD", DRAFT,
+    [], [], [],
+    DateTime.UtcNow, DateTime.UtcNow
+  );
+}
+
+public record FinancialDocumentPartyRecord(string PartyId, string PartyRole)
+{
+  #region PartyRole
+  public const string Sender = "Sender";
+  public const string Recipient = "Recipient";
   #endregion
 }
 
-public record DocumentItemRecord(
-  string DocumentItemId,
+public record FinancialDocumentItemRecord(
   int LineNumber,
-  string ProductId,
+  string ItemId,
   int Quantity,
+  double Subtotal
+);
+
+public record FinancialItemRecord(
+  string ItemId,
+  string Name,
+  string ItemCategory,
   double UnitPrice,
-  double Subtotal,
-  double Tax
-) {}
+  double TaxRate,
+  string Currency) {}
+
+public record FinancialDocumentRequest(
+  string DocumentType,
+  DateOnly IssueDate,
+  DateOnly DueDate,
+  double TotalAmount,
+  string Currency,
+  double TaxAmount,
+  string DocumentStatus,
+  List<FinancialDocumentPartyRecord> Parties,
+  List<FinancialDocumentItemRecord> Items,
+  Dictionary<string, object> Extends
+);
+
+public record FinancialDocumentSearchCriteria();

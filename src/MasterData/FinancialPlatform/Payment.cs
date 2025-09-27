@@ -1,10 +1,8 @@
-namespace Solutions;
-
-using Shared;
+namespace MasterData.FinancialPlatform;
 
 public record PaymentRecord(
   string PaymentId,
-  DateOnly ReportDate,
+  DateOnly PaymentDate,
   string OperationType,
   double Amount,
   string PaymentMethod,
@@ -13,8 +11,7 @@ public record PaymentRecord(
   List<PaymentAllocationRecord> Allocations,
   DateTime CreatedAt,
   DateTime UpdatedAt
-) : AuditEntity(CreatedAt, UpdatedAt)
-{
+) {
   #region OperationType
   public const string CREDIT = "CREDIT";
   public const string DEBIT = "DEBIT";

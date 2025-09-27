@@ -1,4 +1,4 @@
-namespace Solutions;
+namespace MasterData.FinancialPlatform;
 
 public record PaymentAccountEntity();
 

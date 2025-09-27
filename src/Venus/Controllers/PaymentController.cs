@@ -1,5 +1,5 @@
 using Auth;
-using Solutions;
+using MasterData.FinancialPlatform;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
 
