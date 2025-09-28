@@ -1,3 +1,5 @@
+using MasterData.Foundation;
+
 namespace MasterData.FinancialPlatform;
 
 public record PaymentRecord(

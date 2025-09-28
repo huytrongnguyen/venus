@@ -48,11 +48,11 @@ public record FinancialDocumentRecord(
   );
 }
 
-public record FinancialDocumentPartyRecord(string PartyId, string PartyRole)
+public record FinancialDocumentPartyRecord(string LegalEntityId, string PartyRole)
 {
   #region PartyRole
-  public const string Sender = "Sender";
-  public const string Recipient = "Recipient";
+  public const string SENDER = "SENDER";
+  public const string RECIPIENT = "RECIPIENT";
   #endregion
 }
 
@@ -84,4 +84,4 @@ public record FinancialDocumentRequest(
   Dictionary<string, object> Extends
 );
 
-public record FinancialDocumentSearchCriteria();
+public record FinancialDocumentSearchCriteria(string DocumentType, string DocumentStatus);

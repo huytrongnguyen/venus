@@ -5,7 +5,7 @@ using Shared;
 
 namespace Venus.Controllers;
 
-[Route("api/payments")]
+[Route("api/financial-platform/payments")]
 [ApiController]
 [AuthFilter]
 public class PaymentController(PaymentService paymentService) : ControllerBase {

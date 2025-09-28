@@ -7,6 +7,7 @@ import { AppLayout, RequireAuth } from 'venus/components';
 import { navigator } from 'masterdata/core';
 import { ProductsView } from './products.view';
 import { WalletView, InvoiceListView, PurchaseOrderListView } from './financial-platform';
+import { LegalEntityView } from './foundation';
 
 export function AppView() {
   useEffect(() => {
@@ -22,6 +23,7 @@ export function AppView() {
       <Route path="/finance-platform/sales/invoices" element={<RequireAuth component={InvoiceListView} title="Invoices" />} />
       <Route path="/finance-platform/business-account/:accountId" element={<RequireAuth component={WalletView} title="Business Account" />} />
       <Route path="/finance-platform/business-account" element={<Navigate to="/finance-platform/business-account/1" />} />
+      <Route path="/foundation/entities/:entityId" element={<RequireAuth component={LegalEntityView} title="Legal Entity" />} />
       <Route path="*" element={<Navigate to="/products" />} />
     </Routes>} />
   </Router>
