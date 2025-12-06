@@ -9,9 +9,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "masterdata/core": ["src/MasterData/ClientApp/core"],
       "reports/core": ["src/Reports/ClientApp/core"],
-      "solutions/core": ["src/Solutions/ClientApp/core"],
       "admin/core": ["src/Administration/ClientApp/core"],
       "venus/components": ["src/Venus/ClientApp/ts/components"],
       "venus/core": ["src/Venus/ClientApp/ts/core"]
@@ -22,5 +20,8 @@
     "strictPropertyInitialization": false,
     "inlineSourceMap": true,
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "src/Shared/ClientApp/rosie/node_modules"
+  ]
 }

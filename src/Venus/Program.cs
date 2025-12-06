@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Shared;
-using Solutions;
 using Venus.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,14 +25,9 @@ var dataSource = dataSourceBuilder.Build();
 var services = builder.Services;
 
 services
-    .AddDbContext<VenusDbContext>(options =>
-    {
+    .AddDbContext<VenusDbContext>(options => {
       options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
     })
-    .AddScoped<KycService>()
-    .AddScoped<ChatService>()
-    // .AddScoped<InvoiceService>()
-    // .AddScoped<PaymentService>()
     .AddScoped<UserService>()
     .AddScoped<AuthService>()
     .AddCors()

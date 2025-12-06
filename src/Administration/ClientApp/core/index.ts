@@ -15,14 +15,6 @@ export type UserGroup = {
 export const UserGroupStore = Model<UserGroup[]>({ proxy: { url: '/api/users/groups' } });
 
 export const navigator: NavItem[] = [{
-  navId: 'partner-management',
-  navName: 'Partner management',
-  children: [{
-    navId: 'clients',
-    navName: 'Clients',
-    navPath: '/clients'
-  }]
-}, {
   navId: 'access-management',
   navName: 'Access management',
   children: [{
